@@ -5,9 +5,13 @@ package com.archer.retrofittest.io;
  */
 public class ApiConstants {
 
-    public static final String URL_BASE = "http://ws.audioscrobbler.com/";
-    public static final String PATH_BIN = "/bins";
-    public static final String PARAM_SONGS = "bin";
+//    https://api.myjson.com/bins/4dsrd
+
+    public static final String URL_BASE = "https://api.myjson.com/";
+    public static final String PATH_BIN = "bins/";
+    public static final String PARAM_SONGS = "4dsrd";
+
+    public static final String URL_SONGS = PATH_BIN + PARAM_SONGS;
 
 
 }
