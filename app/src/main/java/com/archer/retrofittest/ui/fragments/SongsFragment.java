@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.archer.retrofittest.R;
+import com.archer.retrofittest.models.Song;
+import com.archer.retrofittest.ui.ItemOffsetDecoration;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
 
 import java.util.ArrayList;
@@ -17,8 +19,8 @@ import java.util.ArrayList;
 public class SongsFragment extends Fragment {
 
     public static final String LOG_TAG = SongsFragment.class.getSimpleName();
-    public static final int NUM_COLUMS = 2;
-    private RecyclerView mHypedArtistList;
+    public static final int NUM_COLUMS = 3;
+    private RecyclerView mSongList;
     private SongAdapter adapter;
 
 
@@ -36,13 +38,31 @@ public class SongsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_songs, container, false);
+        mSongList = (RecyclerView) root.findViewById(R.id.mRecyclerList);
+
+        setupGridSongsListConfiguration();
+        setDummieContent();
+
         return root;
     }
 
-    private void setupSongsList() {
-        mHypedArtistList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMS));
-        mHypedArtistList.setAdapter(adapter);
-        mHypedArtistList.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.integer.offset));
+    private void setupGridSongsListConfiguration() {
+        mSongList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMS));
+        mSongList.setAdapter(adapter);
+        mSongList.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.integer.offset));
+    }
+
+    private void setDummieContent()
+    {
+        ArrayList<Song> dummieList = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++) {
+            Song song = new Song();
+            song.setTitle("Song " + i);
+            dummieList.add(song);
+        }
+
+        adapter.addAll(dummieList);
     }
 
 }
