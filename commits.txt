@@ -1,3 +1,45 @@
+commit 090e86b7189de1b55d5dd418e496092be9f02fc7
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 11:33:53 2016 -0400
+
+    Agregado de datos con retrofit con exito
+
+commit 97651a9e311ca93b492191d1b84fb6349ec2e0d9
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 11:13:51 2016 -0400
+
+    Agregado SongDeserializer retornando solo el nombre de la cancion
+
+commit 77e8a10cc03b58c0c1db342c247fe3d12797f769
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 10:57:18 2016 -0400
+
+    Anadido SongAdapter
+
+commit 5166f571918427c6c852f78d260047546489bd88
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 10:37:45 2016 -0400
+
+    Agregado SongApiService
+
+commit a4825ebdaf62727f116b95bce38ca3bee1a7a517
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 10:15:45 2016 -0400
+
+    Agregada clase de utileria JsonKeys
+
+commit 085f98f11a460fe8ef4e4a3b131a971f61e7292f
+Author: Archer <yatogami18@gmail.com>
+Date:   Mon Feb 1 23:44:07 2016 -0400
+
+    Agregadas librerias Retrofit2 y Retrofit2:Gson-converter
+
+commit f634645b46a37d66d44a51cfc97ba09d8f06d552
+Author: Archer <yatogami18@gmail.com>
+Date:   Mon Feb 1 23:16:29 2016 -0400
+
+    Agregado Adaptador
+
 commit f34c08b674d07c793dfe9f363f049e93def50cac
 Author: Archer <yatogami18@gmail.com>
 Date:   Mon Feb 1 22:50:12 2016 -0400
