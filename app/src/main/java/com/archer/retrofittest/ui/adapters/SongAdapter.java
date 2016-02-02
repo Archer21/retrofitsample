@@ -46,7 +46,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     @Override
     public void onBindViewHolder(SongViewHolder holder, int position) {
         Song currentSong = mSongsList.get(position);
-        holder.setmTitle(currentSong.getTitle());
+        holder.setmName(currentSong.getName());
         if (currentSong.getUrlSmallImage() != null)
         {
             holder.setmImage(currentSong.getUrlSmallImage());
@@ -73,9 +73,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             mTitle = (TextView)  itemView.findViewById(R.id.item_title);
         }
 
-        public void setmTitle(String title)
+        public void setmName(String name)
         {
-            mTitle.setText(title);
+            mTitle.setText(name);
         }
 
         public void setmImage(String url)

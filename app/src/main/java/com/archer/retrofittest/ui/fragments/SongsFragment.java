@@ -58,7 +58,7 @@ public class SongsFragment extends Fragment {
 
         for (int i = 0; i < 8; i++) {
             Song song = new Song();
-            song.setTitle("Song " + i);
+            song.setName("Song " + i);
             dummieList.add(song);
         }
 
