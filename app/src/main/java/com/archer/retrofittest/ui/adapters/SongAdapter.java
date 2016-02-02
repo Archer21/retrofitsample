@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.archer.retrofittest.R;
-import com.archer.retrofittest.models.Song;
+import com.archer.retrofittest.domain.Song;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

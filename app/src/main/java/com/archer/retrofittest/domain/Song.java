@@ -1,19 +1,19 @@
-package com.archer.retrofittest.models;
+package com.archer.retrofittest.domain;
 
 /**
  * Created by Archer on 1/2/16.
  */
 public class Song {
 
-    private String title;
+    private String name;
     private String urlSmallImage;
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUrlSmallImage() {
@@ -27,7 +27,7 @@ public class Song {
     @Override
     public String toString() {
         return "Song{" +
-                "title='" + title + '\'' +
+                "name='" + name + '\'' +
                 ", urlSmallImage='" + urlSmallImage + '\'' +
                 '}';
     }

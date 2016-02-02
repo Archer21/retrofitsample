@@ -1,0 +1,5 @@
+commit f34c08b674d07c793dfe9f363f049e93def50cac
+Author: Archer <yatogami18@gmail.com>
+Date:   Mon Feb 1 22:50:12 2016 -0400
+
+    Agregado Adaptador

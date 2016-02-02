@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.archer.retrofittest.R;
-import com.archer.retrofittest.models.Song;
+import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.ui.ItemOffsetDecoration;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
 
