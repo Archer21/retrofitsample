@@ -25,7 +25,7 @@ public class SongDeserializer implements JsonDeserializer<SongResponse> {
         JsonObject songsResponseData = json.getAsJsonObject().getAsJsonObject(JsonKeys.SONGS_RESULTS);
         JsonArray  songArray = songsResponseData.getAsJsonArray(JsonKeys.SONGS_ARRAY);
         response.setSongs(extractSongsFromJsonArray(songArray));
-
+        return response;
     }
     private ArrayList<Song> extractSongsFromJsonArray(JsonArray array)
     {

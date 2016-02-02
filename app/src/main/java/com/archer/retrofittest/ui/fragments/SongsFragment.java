@@ -11,10 +11,16 @@ import android.view.ViewGroup;
 
 import com.archer.retrofittest.R;
 import com.archer.retrofittest.domain.Song;
+import com.archer.retrofittest.io.SongApiAdapter;
+import com.archer.retrofittest.io.model.SongResponse;
 import com.archer.retrofittest.ui.ItemOffsetDecoration;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SongsFragment extends Fragment {
 
@@ -41,28 +47,32 @@ public class SongsFragment extends Fragment {
         mSongList = (RecyclerView) root.findViewById(R.id.mRecyclerList);
 
         setupGridSongsListConfiguration();
-        setDummieContent();
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Call<SongResponse> call = SongApiAdapter.getApiService().getSongs();
+        call.enqueue(new Callback<SongResponse>() {
+            @Override
+            public void onResponse(Response<SongResponse> response) {
+                adapter.addAll(response.body().getArtists());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     private void setupGridSongsListConfiguration() {
         mSongList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMS));
         mSongList.setAdapter(adapter);
         mSongList.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.integer.offset));
-    }
-
-    private void setDummieContent()
-    {
-        ArrayList<Song> dummieList = new ArrayList<>();
-
-        for (int i = 0; i < 8; i++) {
-            Song song = new Song();
-            song.setName("Song " + i);
-            dummieList.add(song);
-        }
-
-        adapter.addAll(dummieList);
     }
 
 }
