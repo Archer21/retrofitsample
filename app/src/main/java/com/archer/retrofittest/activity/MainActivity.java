@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.archer.retrofittest.R;
 import com.archer.retrofittest.ui.fragments.SongsFragment;
+import com.archer.retrofittest.ui.fragments.TopArtistsFragment;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity{
         {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.main_container, new SongsFragment()).commit();
+            fragmentTransaction.add(R.id.main_container, new TopArtistsFragment()).commit();
         }
 
 
