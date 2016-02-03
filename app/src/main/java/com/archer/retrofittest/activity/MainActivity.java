@@ -105,9 +105,4 @@ public class MainActivity extends AppCompatActivity{
                 }
         );
     }
-
-
-    private void selectItem(NavigationView navigationView) {
-
-    }
 }
