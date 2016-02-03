@@ -25,14 +25,24 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    Toolbar toolbar;
+    ViewPager viewPager;
+    TabLayout tabLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+        setupViewPager();
+
+        if (toolbar != null)
+            setSupportActionBar(toolbar);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -40,16 +50,11 @@ public class MainActivity extends AppCompatActivity{
             setupDrawerContent(navigationView);
         }
 
-        setToolbar(drawerLayout); // Setear Toolbar como action bar
-        setTabLayout();
+        setDrawerLayout(drawerLayout); // Setear Toolbar como action bar
+        setupViewPager();
     }
 
-    private void setToolbar(DrawerLayout drawer) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null)
-        {
-            setSupportActionBar(toolbar);
-        }
+    private void setDrawerLayout(DrawerLayout drawer) {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -60,18 +65,14 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void setTabLayout()
-    {
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+    private void setupViewPager() {
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), buildFragments()));
-
         tabLayout.setupWithViewPager(viewPager);
+
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_hyped_active);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_top_active);
 
     }
-
 
     private ArrayList<Fragment> buildFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
