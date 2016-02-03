@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/artist_img"
+        android:id="@+id/artist_cover_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
@@ -55,6 +55,14 @@
                 android:textColor="@color/text" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/artist_votes"
+            android:text="1000 votes"
+            android:textStyle="bold"
+            android:textColor="@color/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
