@@ -1,3 +1,27 @@
+commit 72a20ab8c98456b94ef0906635b54721438e8c25
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 10:31:38 2016 -0400
+
+    Agregado Navigation Drawer, aun por optimizar
+
+commit 2ce9a872e6f41b9e9f2e8f2b142871458e78479a
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 10:12:39 2016 -0400
+
+    commit 1
+
+commit b42e714381f118ae4df32df59ad1da7478aa7707
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 23:35:00 2016 -0400
+
+    Agregado Navigation Drawer, aun por optimizar
+
+commit 257b8ceadb24067d86571d3f87c5ea6e2a5aeac6
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 21:52:23 2016 -0400
+
+    Consumiendo Api correctamenta
+
 commit 5ae44724a339bf60f65c3b51dbfe2da38ea00712
 Author: Archer <yatogami18@gmail.com>
 Date:   Tue Feb 2 11:35:51 2016 -0400
