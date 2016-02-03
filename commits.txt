@@ -1,3 +1,58 @@
+commit 942ac56e94d40da6aefffb57a8f899199f3b727c
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 18:29:32 2016 -0400
+
+    Agregados iconos a las tabs
+
+commit eeb990227cce9c937fee92870bf9bad416ece63c
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 18:21:17 2016 -0400
+
+    Agregado TabLayout
+
+commit ac58d947a19bb244d5d3e1ef64aab8edb32b2d87
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 17:03:46 2016 -0400
+
+    Agregados TopArtistAdapter y TopArtistViewHolder
+
+commit 0033052e0d8d56589cdf32df7deb26b5f76872c1
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 13:40:56 2016 -0400
+
+    Agregado modelo de artista y TopArtist ViewHolder
+
+commit a02eadb6f4479f745e32b5901f081d6a8bb35a34
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 13:12:55 2016 -0400
+
+    Eliminado modelo TopARtist
+
+commit 0a510acc6cb65e278ad86454125572af83ef6ac4
+Merge: 28e03a1 e96240c
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 13:10:57 2016 -0400
+
+    Merge remote-tracking branch 'origin/addArtistFragment'
+
+commit 28e03a12736bf9316e73dde405ce8e1bf6268eee
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 13:09:00 2016 -0400
+
+    Agregada nueva URL_BASE
+
+commit e96240c74e5ce266254476d099a17d633bcb5789
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 11:35:00 2016 -0400
+
+    Preparando modelo de dominio Artist
+
+commit 877861956a6bf8df0ecc8e96fc46e7ce8097a2bd
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 11:05:11 2016 -0400
+
+    Agregados TopArtistFragment, y el esqueleto del adaptador y viewholder
+
 commit 72a20ab8c98456b94ef0906635b54721438e8c25
 Author: Archer <yatogami18@gmail.com>
 Date:   Wed Feb 3 10:31:38 2016 -0400
