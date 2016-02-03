@@ -2,9 +2,12 @@ package com.archer.retrofittest.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,24 +16,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.archer.retrofittest.R;
+import com.archer.retrofittest.ui.adapters.PagerAdapter;
+import com.archer.retrofittest.ui.fragments.SongsFragment;
 import com.archer.retrofittest.ui.fragments.TopArtistsFragment;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
-
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if (savedInstanceState == null)
-        {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.main_container, new TopArtistsFragment()).commit();
-        }
 
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -40,13 +41,16 @@ public class MainActivity extends AppCompatActivity{
         }
 
         setToolbar(drawerLayout); // Setear Toolbar como action bar
+        setTabLayout();
     }
 
     private void setToolbar(DrawerLayout drawer) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        if (toolbar != null)
+        {
+            setSupportActionBar(toolbar);
+        }
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -54,7 +58,31 @@ public class MainActivity extends AppCompatActivity{
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
+    }
 
+    private void setTabLayout()
+    {
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), buildFragments()));
+
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_hyped_active);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_top_active);
+
+    }
+
+
+    private ArrayList<Fragment> buildFragments() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        SongsFragment songsFragment = new SongsFragment();
+        TopArtistsFragment topArtistsFragment = new TopArtistsFragment();
+
+        fragments.add(songsFragment);
+        fragments.add(topArtistsFragment);
+
+
+        return fragments;
     }
 
     @Override
