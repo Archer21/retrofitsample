@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_songs"
+            android:icon="@android:drawable/ic_menu_week"
+            android:title="All Songs" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="Favorites" />
+        <item
+            android:id="@+id/nav_downloads"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Downloads" />
+        <item
+            android:id="@+id/nav_friends"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="Friends" />
+    </group>
+    <item android:title="Sub items">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@android:drawable/ic_popup_reminder"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@android:drawable/ic_menu_help"
+                android:title="Help" />
+        </menu>
+    </item>
+</menu>

@@ -8,9 +8,6 @@ import com.google.gson.GsonBuilder;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 
-/**
- * Created by Archer on 2/2/16.
- */
 public class SongApiAdapter {
 
     private static SongApiService API_SERVICE;
