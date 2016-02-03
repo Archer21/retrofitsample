@@ -1,3 +1,9 @@
+commit 5ae44724a339bf60f65c3b51dbfe2da38ea00712
+Author: Archer <yatogami18@gmail.com>
+Date:   Tue Feb 2 11:35:51 2016 -0400
+
+    Agregados logs
+
 commit 090e86b7189de1b55d5dd418e496092be9f02fc7
 Author: Archer <yatogami18@gmail.com>
 Date:   Tue Feb 2 11:33:53 2016 -0400

@@ -3,6 +3,7 @@ package com.archer.retrofittest.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 public class SongsFragment extends Fragment {
 
     public static final String LOG_TAG = SongsFragment.class.getSimpleName();
-    public static final int NUM_COLUMS = 3;
+    public static final int NUM_COLUMS = 2;
     private RecyclerView mSongList;
     private SongAdapter adapter;
 
@@ -73,6 +74,7 @@ public class SongsFragment extends Fragment {
         mSongList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMS));
         mSongList.setAdapter(adapter);
         mSongList.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.integer.offset));
+        mSongList.setItemAnimator(new DefaultItemAnimator());
     }
 
 }

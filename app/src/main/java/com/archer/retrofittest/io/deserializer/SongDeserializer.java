@@ -13,6 +13,7 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Archer on 2/2/16.
@@ -36,10 +37,34 @@ public class SongDeserializer implements JsonDeserializer<SongResponse> {
 
             JsonObject songData = array.get(i).getAsJsonObject();
             String name = songData.get(JsonKeys.SONG_NAME).getAsString();
+
+            JsonArray songImages = songData.getAsJsonArray(JsonKeys.ARTIST_IMAGES);
+            HashMap<Integer, String>  images = extractArtistImageFromJsonArray(songImages);
+
             currentSong.setName(name);
+            currentSong.setUrlSmallImage(images.get(0));
+            currentSong.setUrlMediumImage(images.get(1));
+
             songs.add(currentSong);
         }
         return songs;
+    }
+
+    private HashMap<Integer, String> extractArtistImageFromJsonArray(JsonArray imagesArray)
+    {
+        HashMap<Integer, String> images = new HashMap<>();
+
+        int arraySize = imagesArray.size();
+        for (int i = 0; i < arraySize; i++) {
+            JsonObject imagesData = imagesArray.get(i).getAsJsonObject();
+
+            String small  = imagesData.get(JsonKeys.IMAGE_SMALL).getAsString();
+            String medium = imagesData.get(JsonKeys.IMAGE_MEDIUM).getAsString();
+
+                images.put(0, small);
+                images.put(1, medium);
+        }
+        return images;
     }
 
 }

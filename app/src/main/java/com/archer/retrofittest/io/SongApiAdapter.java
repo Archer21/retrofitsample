@@ -20,7 +20,7 @@ public class SongApiAdapter {
         if (API_SERVICE == null)
         {
             Retrofit adapter = new Retrofit.Builder()
-                    .baseUrl("https://api.myjson.com/")
+                    .baseUrl(ApiConstants.URL_BASE)
                     .addConverterFactory(GsonConverterFactory.create(buildLastFmApiGsonConverter()))
                     .build();
 

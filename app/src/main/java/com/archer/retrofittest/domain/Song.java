@@ -11,6 +11,7 @@ public class Song {
     @SerializedName(JsonKeys.SONG_NAME)
     private String name;
     private String urlSmallImage;
+    private String urlMediumImage;
 
     public String getName() {
         return name;
@@ -28,11 +29,20 @@ public class Song {
         this.urlSmallImage = urlSmallImage;
     }
 
+    public String getUrlMediumImage() {
+        return urlMediumImage;
+    }
+
+    public void setUrlMediumImage(String urlMediumImage) {
+        this.urlMediumImage = urlMediumImage;
+    }
+
     @Override
     public String toString() {
         return "Song{" +
                 "name='" + name + '\'' +
                 ", urlSmallImage='" + urlSmallImage + '\'' +
+                ", urlMediumImage='" + urlMediumImage + '\'' +
                 '}';
     }
 }
