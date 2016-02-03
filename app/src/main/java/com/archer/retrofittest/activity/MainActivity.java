@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.archer.retrofittest.R;
-import com.archer.retrofittest.ui.fragments.SongsFragment;
 import com.archer.retrofittest.ui.fragments.TopArtistsFragment;
 
 public class MainActivity extends AppCompatActivity{

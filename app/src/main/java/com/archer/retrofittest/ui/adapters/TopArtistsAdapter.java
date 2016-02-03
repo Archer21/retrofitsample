@@ -23,6 +23,10 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistViewHolder>
         this.mArtistsList = new ArrayList<>();
     }
 
+    public void addAll(ArrayList<Artist> artists) {
+        mArtistsList.addAll(artists);
+    }
+
     @Override
     public TopArtistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_top_artist_row, parent, false);
@@ -31,7 +35,14 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistViewHolder>
 
     @Override
     public void onBindViewHolder(TopArtistViewHolder holder, int position) {
-        
+        Artist currentArtist = mArtistsList.get(position);
+        holder.setArtistName(currentArtist.getName());
+        holder.setArtistVotes(currentArtist.getVotes());
+        if (currentArtist.getUrlImageCover() != null) {
+            holder.setArtistCoverImage(context, currentArtist.getUrlImageCover());
+        } else {
+            holder.setDafaultImage(context);
+        }
     }
 
     @Override
