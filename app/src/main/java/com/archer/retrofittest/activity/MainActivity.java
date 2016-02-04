@@ -109,12 +109,11 @@ public class MainActivity extends AppCompatActivity{
             fragment = new FavoritesFragment();
         } else if (id == R.id.nav_friends) {
             fragment = new FriendsFragment();
+        } else if (id == R.id.nav_settings) {
+            Toast.makeText(getApplicationContext(), "SettingsFragment", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_help) {
+            Toast.makeText(getApplicationContext(), "HelpFragment", Toast.LENGTH_SHORT).show();
         }
-// else if (id == R.id.nav_settings) {
-//            Toast.makeText(getApplicationContext(), "SettingsFragment", Toast.LENGTH_SHORT).show();
-//        } else if (id == R.id.nav_help) {
-//            Toast.makeText(getApplicationContext(), "HelpFragment", Toast.LENGTH_SHORT).show();
-//        }
 
         return fragment;
     }

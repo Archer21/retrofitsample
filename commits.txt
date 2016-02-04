@@ -1,3 +1,41 @@
+commit 1e902a40da24cd4bcf4a58aece3061fa90de49e8
+Merge: 33535e3 91c7b25
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 22:39:11 2016 -0400
+
+    Merge branch 'addtabstofragment'
+    TabsLayout y NavigationDrawer funcionando correctamente
+
+commit 33535e374d6de44fcdf93256b9296aa43e40e26e
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 22:35:36 2016 -0400
+
+    Eliminado module
+
+commit 91c7b25ba6e5b912c8b0c58e82c22d0cc1c1a791
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 22:33:25 2016 -0400
+
+    Agregado TabLayout en el el fragmento
+
+commit c60f8d192cc8aba3376965e1cdf4b388542dae23
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 21:51:19 2016 -0400
+
+    Comenzando con MainMenuFragment
+
+commit 386515ddda6970cb79ffb8b59be3d99c2f404702
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 21:32:49 2016 -0400
+
+    Preparados los fragmentos del drawer
+
+commit 2f9caefd09265908d13b5709bae803eb876ab7ae
+Author: Archer <yatogami18@gmail.com>
+Date:   Wed Feb 3 18:32:39 2016 -0400
+
+    Agregados Commits
+
 commit 942ac56e94d40da6aefffb57a8f899199f3b727c
 Author: Archer <yatogami18@gmail.com>
 Date:   Wed Feb 3 18:29:32 2016 -0400
