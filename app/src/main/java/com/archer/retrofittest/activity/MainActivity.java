@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity{
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-//    ViewPager viewPager;
-//    TabLayout tabLayout;
 
 
     @Override
@@ -46,10 +44,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        viewPager = (ViewPager) findViewById(R.id.viewPager);
-//        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-
-//        setupViewPager();
 
         if (toolbar != null)
             setSupportActionBar(toolbar);
@@ -81,26 +75,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-//    private ArrayList<Fragment> buildFragments() {
-//        ArrayList<Fragment> fragments = new ArrayList<>();
-//        SongsFragment songsFragment = new SongsFragment();
-//        TopArtistsFragment topArtistsFragment = new TopArtistsFragment();
-//
-//        fragments.add(songsFragment);
-//        fragments.add(topArtistsFragment);
-//
-//
-//        return fragments;
-//    }
-//
-//    private void setupViewPager() {
-//        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), buildFragments()));
-//        tabLayout.setupWithViewPager(viewPager);
-//
-//        tabLayout.getTabAt(0).setIcon(R.drawable.ic_hyped_active);
-//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_top_active);
-//
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,16 +109,18 @@ public class MainActivity extends AppCompatActivity{
             fragment = new FavoritesFragment();
         } else if (id == R.id.nav_friends) {
             fragment = new FriendsFragment();
-        } else if (id == R.id.nav_settings) {
-            Toast.makeText(getApplicationContext(), "SettingsFragment", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_help) {
-            Toast.makeText(getApplicationContext(), "HelpFragment", Toast.LENGTH_SHORT).show();
         }
+// else if (id == R.id.nav_settings) {
+//            Toast.makeText(getApplicationContext(), "SettingsFragment", Toast.LENGTH_SHORT).show();
+//        } else if (id == R.id.nav_help) {
+//            Toast.makeText(getApplicationContext(), "HelpFragment", Toast.LENGTH_SHORT).show();
+//        }
 
         return fragment;
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -156,7 +132,10 @@ public class MainActivity extends AppCompatActivity{
 
                         Fragment currentFragment = selectItem(item);
 
-                        fragmentTransaction.replace(R.id.main_container, currentFragment).commit();
+                        if (currentFragment != null)
+                        {
+                            fragmentTransaction.replace(R.id.main_container, currentFragment).commit();
+                        }
 
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                         drawer.closeDrawer(GravityCompat.START);
