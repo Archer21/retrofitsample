@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Song {
 
-    @SerializedName(JsonKeys.SONG_NAME)
+    @SerializedName(JsonKeys.SONG_TITLE)
     private String name;
     private String urlSmallImage;
     private String urlMediumImage;

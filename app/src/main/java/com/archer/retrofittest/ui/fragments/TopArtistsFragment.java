@@ -10,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.archer.retrofittest.R;
-import com.archer.retrofittest.domain.Artist;
+import com.archer.retrofittest.io.apiadapters.SongApiAdapter;
+import com.archer.retrofittest.io.model.ArtistResponse;
 import com.archer.retrofittest.ui.adapters.TopArtistsAdapter;
 
-import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TopArtistsFragment extends Fragment {
 
@@ -22,6 +26,23 @@ public class TopArtistsFragment extends Fragment {
 
     public TopArtistsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Call<ArtistResponse> call = SongApiAdapter.getApiService().getArtistsResponse();
+        call.enqueue(new Callback<ArtistResponse>() {
+            @Override
+            public void onResponse(Response<ArtistResponse> response) {
+                adapter.addAll(response.body().getArtists());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override

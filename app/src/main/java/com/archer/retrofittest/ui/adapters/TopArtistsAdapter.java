@@ -23,8 +23,12 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistViewHolder>
         this.mArtistsList = new ArrayList<>();
     }
 
-    public void addAll(ArrayList<Artist> artists) {
-        mArtistsList.addAll(artists);
+    public void addAll(ArrayList<Artist> artists){
+        if (artists==null)
+            throw new NullPointerException("The items cannot by null");
+
+        this.mArtistsList.addAll(artists);
+        notifyDataSetChanged();
     }
 
     @Override

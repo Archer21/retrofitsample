@@ -36,10 +36,10 @@ public class SongDeserializer implements JsonDeserializer<SongResponse> {
             Song currentSong = new Song();
 
             JsonObject songData = array.get(i).getAsJsonObject();
-            String name = songData.get(JsonKeys.SONG_NAME).getAsString();
+            String name = songData.get(JsonKeys.SONG_TITLE).getAsString();
 
-            JsonArray songImages = songData.getAsJsonArray(JsonKeys.ARTIST_IMAGES);
-            HashMap<Integer, String>  images = extractArtistImageFromJsonArray(songImages);
+            JsonArray songImages = songData.getAsJsonArray(JsonKeys.SONG_IMAGES);
+            HashMap<Integer, String>  images = extractSongsImageFromJsonArray(songImages);
 
             currentSong.setName(name);
             currentSong.setUrlSmallImage(images.get(0));
@@ -50,7 +50,7 @@ public class SongDeserializer implements JsonDeserializer<SongResponse> {
         return songs;
     }
 
-    private HashMap<Integer, String> extractArtistImageFromJsonArray(JsonArray imagesArray)
+    private HashMap<Integer, String> extractSongsImageFromJsonArray(JsonArray imagesArray)
     {
         HashMap<Integer, String> images = new HashMap<>();
 
@@ -58,8 +58,8 @@ public class SongDeserializer implements JsonDeserializer<SongResponse> {
         for (int i = 0; i < arraySize; i++) {
             JsonObject imagesData = imagesArray.get(i).getAsJsonObject();
 
-            String small  = imagesData.get(JsonKeys.IMAGE_SMALL).getAsString();
-            String medium = imagesData.get(JsonKeys.IMAGE_MEDIUM).getAsString();
+            String small  = imagesData.get(JsonKeys.SONG_IMAGE_SMALL).getAsString();
+            String medium = imagesData.get(JsonKeys.SONG_IMAGE_MEDIUM).getAsString();
 
                 images.put(0, small);
                 images.put(1, medium);

@@ -14,10 +14,10 @@ public class ApiConstants {
     public static final String URL_SONGS = PATH_BIN + PARAM_SONGS;
 
 //
-//  https://api.myjson.com/bins/2qtzx
+//  https://api.myjson.com/bins/tl69
 
-    public static final String PARAM_ARTISTS = "2qtzx";
+    public static final String PARAM_ARTISTS = "tl69";
 
-    public static final String URL_ARTISTS = PATH_BIN + PARAM_SONGS;
+    public static final String URL_ARTISTS = PATH_BIN + PARAM_ARTISTS;
 
 }
