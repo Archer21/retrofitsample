@@ -1,5 +1,6 @@
 package com.archer.retrofittest.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -14,9 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.archer.retrofittest.R;
 import com.archer.retrofittest.ui.adapters.PagerAdapter;
+import com.archer.retrofittest.ui.fragments.DownloadsFragment;
+import com.archer.retrofittest.ui.fragments.FavoritesFragment;
+import com.archer.retrofittest.ui.fragments.FriendsFragment;
+import com.archer.retrofittest.ui.fragments.MainMenuFragment;
 import com.archer.retrofittest.ui.fragments.SongsFragment;
 import com.archer.retrofittest.ui.fragments.TopArtistsFragment;
 
@@ -24,10 +30,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private DrawerLayout drawerLayout;
     Toolbar toolbar;
-    ViewPager viewPager;
-    TabLayout tabLayout;
+
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
 
 
     @Override
@@ -36,13 +44,16 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-
-        setupViewPager();
 
         if (toolbar != null)
             setSupportActionBar(toolbar);
+
+        if (savedInstanceState == null)
+        {
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.main_container, new MainMenuFragment()).commit();
+        }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -51,7 +62,6 @@ public class MainActivity extends AppCompatActivity{
         }
 
         setDrawerLayout(drawerLayout); // Setear Toolbar como action bar
-        setupViewPager();
     }
 
     private void setDrawerLayout(DrawerLayout drawer) {
@@ -65,26 +75,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void setupViewPager() {
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), buildFragments()));
-        tabLayout.setupWithViewPager(viewPager);
-
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_hyped_active);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_top_active);
-
-    }
-
-    private ArrayList<Fragment> buildFragments() {
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        SongsFragment songsFragment = new SongsFragment();
-        TopArtistsFragment topArtistsFragment = new TopArtistsFragment();
-
-        fragments.add(songsFragment);
-        fragments.add(topArtistsFragment);
-
-
-        return fragments;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,26 +95,46 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    public Fragment selectItem(MenuItem item){
+        int id = item.getItemId();
+
+        Fragment fragment = null;
+
+
+        if (id == R.id.nav_all_songs) {
+            fragment = new MainMenuFragment();
+        } else if (id == R.id.nav_downloads) {
+            fragment = new DownloadsFragment();
+        } else if (id == R.id.nav_favorites) {
+            fragment = new FavoritesFragment();
+        } else if (id == R.id.nav_friends) {
+            fragment = new FriendsFragment();
+        }
+// else if (id == R.id.nav_settings) {
+//            Toast.makeText(getApplicationContext(), "SettingsFragment", Toast.LENGTH_SHORT).show();
+//        } else if (id == R.id.nav_help) {
+//            Toast.makeText(getApplicationContext(), "HelpFragment", Toast.LENGTH_SHORT).show();
+//        }
+
+        return fragment;
+    }
+
     private void setupDrawerContent(NavigationView navigationView) {
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
 
                     @Override
                     public boolean onNavigationItemSelected(MenuItem item) {
-                        int id = item.getItemId();
 
-                        if (id == R.id.nav_all_songs) {
-                            // Handle the camera action
-                        } else if (id == R.id.nav_downloads) {
+                        fragmentManager = getSupportFragmentManager();
+                        fragmentTransaction = fragmentManager.beginTransaction();
 
-                        } else if (id == R.id.nav_favorites) {
+                        Fragment currentFragment = selectItem(item);
 
-                        } else if (id == R.id.nav_friends) {
-
-                        } else if (id == R.id.nav_settings) {
-
-                        } else if (id == R.id.nav_help) {
-
+                        if (currentFragment != null)
+                        {
+                            fragmentTransaction.replace(R.id.main_container, currentFragment).commit();
                         }
 
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
