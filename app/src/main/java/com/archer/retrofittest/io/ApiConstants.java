@@ -4,8 +4,8 @@ package com.archer.retrofittest.io;
  * Created by Archer on 1/2/16.
  */
 public class ApiConstants {
-
-//    https://api.myjson.com/bins/2qtzx
+//  Popular Songs
+//  https://api.myjson.com/bins/2qtzx
 
     public static final String URL_BASE = "https://api.myjson.com/";
     public static final String PATH_BIN = "bins/";
@@ -13,5 +13,11 @@ public class ApiConstants {
 
     public static final String URL_SONGS = PATH_BIN + PARAM_SONGS;
 
+//
+//  https://api.myjson.com/bins/2qtzx
+
+    public static final String PARAM_ARTISTS = "2qtzx";
+
+    public static final String URL_ARTISTS = PATH_BIN + PARAM_SONGS;
 
 }
