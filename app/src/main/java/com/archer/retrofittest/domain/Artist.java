@@ -1,14 +1,10 @@
 package com.archer.retrofittest.domain;
 
-import com.archer.retrofittest.io.model.JsonKeys;
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by Archer on 3/2/16.
  */
 public class Artist {
 
-    @SerializedName(JsonKeys.ARTIST_NAME)
     private String name;
     private String urlImageCover;
     private String urlImagePhoto;
