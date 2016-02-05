@@ -1,5 +1,6 @@
 package com.archer.retrofittest.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.archer.retrofittest.R;
+import com.archer.retrofittest.activity.SongDetailActivity;
 import com.archer.retrofittest.io.apiadapters.SongApiAdapter;
 import com.archer.retrofittest.io.model.SongResponse;
 import com.archer.retrofittest.ui.ItemOffsetDecoration;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
+import com.archer.retrofittest.ui.utils.RecyclerItemClickListener;
 
 
 import retrofit2.Call;
@@ -72,6 +76,22 @@ public class SongsFragment extends Fragment {
         mSongList.setAdapter(adapter);
         mSongList.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.integer.offset));
         mSongList.setItemAnimator(new DefaultItemAnimator());
+        mSongList.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
+                mSongList, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), "Normal tap", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), SongDetailActivity.class);
+                //intent.putExtra(PHOTO_TRANSFER, flickrRecyclerViewAdapter.getPhoto(position));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(getActivity(), "Long tap", Toast.LENGTH_SHORT).show();
+                //intent.putExtra(PHOTO_TRANSFER, flickrRecyclerViewAdapter.getPhoto(position));
+            }
+        }));
     }
 
 }
