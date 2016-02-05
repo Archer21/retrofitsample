@@ -32,6 +32,7 @@ public class MainMenuFragment extends Fragment {
         viewPager = (ViewPager) root.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) root.findViewById(R.id.tabLayout);
 
+
         setupViewPager();
 
 

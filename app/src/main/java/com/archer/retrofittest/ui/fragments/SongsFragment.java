@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class SongsFragment extends Fragment {
     public static final int NUM_COLUMS = 2;
     private RecyclerView mSongList;
     private SongAdapter adapter;
-
+    Boolean isFirstCall = true;
 
     public SongsFragment() {
         // Required empty public constructor
@@ -41,6 +42,7 @@ public class SongsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new SongAdapter(getActivity());
+
     }
 
     @Override
@@ -53,10 +55,8 @@ public class SongsFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
+    private void callData()
+    {
         Call<SongResponse> call = SongApiAdapter.getApiService().getSongs();
         call.enqueue(new Callback<SongResponse>() {
             @Override
@@ -69,6 +69,18 @@ public class SongsFragment extends Fragment {
                 t.printStackTrace();
             }
         });
+    }
+
+    public void onResume() {
+        super.onResume();
+        if (isFirstCall)
+        {
+            callData();
+            isFirstCall = false;
+            Log.e(LOG_TAG, "Calling Data for first time");
+        } else {
+            Log.e(LOG_TAG, "Data is current visible");
+        }
     }
 
     private void setupGridSongsListConfiguration() {

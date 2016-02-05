@@ -1,13 +1,16 @@
 package com.archer.retrofittest.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.archer.retrofittest.R;
 import com.archer.retrofittest.io.apiadapters.SongApiAdapter;
@@ -21,16 +24,17 @@ import retrofit2.Response;
 
 public class TopArtistsFragment extends Fragment {
 
+    private static final String LOG_TAG = TopArtistsFragment.class.getSimpleName();
     RecyclerView mRecycleArtistList;
     TopArtistsAdapter adapter;
+    Boolean isFirstCall = true;
 
     public TopArtistsFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void callData()
+    {
         Call<ArtistResponse> call = SongApiAdapter.getApiService().getArtistsResponse();
         call.enqueue(new Callback<ArtistResponse>() {
             @Override
@@ -43,6 +47,19 @@ public class TopArtistsFragment extends Fragment {
                 t.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isFirstCall)
+        {
+            callData();
+            isFirstCall = false;
+            Log.e(LOG_TAG, "Calling Data for first time");
+        } else {
+            Log.e(LOG_TAG, "Data is current visible");
+        }
     }
 
     @Override
