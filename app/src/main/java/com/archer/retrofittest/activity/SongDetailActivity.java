@@ -1,15 +1,23 @@
 package com.archer.retrofittest.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.archer.retrofittest.R;
+import com.archer.retrofittest.domain.Song;
+import com.squareup.picasso.Picasso;
 
 public class SongDetailActivity extends AppCompatActivity {
+
+    private static final String CURRENT_SONG = "CURRENT_SONG";
+
+    private TextView songNameDetail;
+    private ImageView photoArtist;
+    private ImageView songCover;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +26,37 @@ public class SongDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        Song detailSong = getIntent().getParcelableExtra(CURRENT_SONG);
+        songNameDetail  = (TextView) findViewById(R.id.songNameDetail);
+        photoArtist     = (ImageView) findViewById(R.id.photo);
+        songCover     = (ImageView) findViewById(R.id.cover);
+
+
+        String artistName = detailSong.getArtistName();
+        String photo  = detailSong.getUrlSmallImage();
+        String cover = detailSong.getUrlMediumImage();
+
+        setPhoto(photo);
+        setCover(cover);
+
+        songNameDetail.setText(artistName);
+
+    }
+
+    public void setPhoto(String url) {
+        Picasso.with(SongDetailActivity.this)
+                .load(url)
+                .placeholder(R.drawable.artist_placeholder)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(photoArtist);
+    }
+
+    public void setCover(String url) {
+        Picasso.with(SongDetailActivity.this)
+                .load(url)
+                .placeholder(R.drawable.artist_placeholder)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(songCover);
     }
 
 }

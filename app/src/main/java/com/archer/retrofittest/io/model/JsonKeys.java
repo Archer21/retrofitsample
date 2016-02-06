@@ -9,6 +9,7 @@ public class JsonKeys {
 
     public static final String SONGS_RESULTS = "songs";
     public static final String SONGS_ARRAY = "song";
+    public static final String SONGS_ARTIST_NAME = "artist";
 
 
     public static final String SONG_TITLE = "title";

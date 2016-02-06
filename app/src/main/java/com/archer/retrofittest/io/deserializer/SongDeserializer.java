@@ -1,5 +1,7 @@
 package com.archer.retrofittest.io.deserializer;
 
+import android.os.Parcel;
+
 import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.io.model.JsonKeys;
 import com.archer.retrofittest.io.model.SongResponse;
@@ -33,15 +35,17 @@ public class SongDeserializer implements JsonDeserializer<SongResponse> {
         ArrayList<Song> songs = new ArrayList<>();
         int size = array.size();
         for (int i = 0; i < size; i++) {
-            Song currentSong = new Song();
+            Song currentSong = new Song(Parcel.obtain());
 
             JsonObject songData = array.get(i).getAsJsonObject();
             String name = songData.get(JsonKeys.SONG_TITLE).getAsString();
+            String artistName = songData.get(JsonKeys.SONGS_ARTIST_NAME).getAsString();
 
             JsonArray songImages = songData.getAsJsonArray(JsonKeys.SONG_IMAGES);
             HashMap<Integer, String>  images = extractSongsImageFromJsonArray(songImages);
 
             currentSong.setName(name);
+            currentSong.setArtistName(artistName);
             currentSong.setUrlSmallImage(images.get(0));
             currentSong.setUrlMediumImage(images.get(1));
 

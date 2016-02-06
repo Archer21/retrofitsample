@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.archer.retrofittest.R;
 import com.archer.retrofittest.activity.SongDetailActivity;
+import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.io.apiadapters.SongApiAdapter;
 import com.archer.retrofittest.io.model.SongResponse;
 import com.archer.retrofittest.ui.ItemOffsetDecoration;
@@ -30,6 +31,7 @@ public class SongsFragment extends Fragment {
 
     public static final String LOG_TAG = SongsFragment.class.getSimpleName();
     public static final int NUM_COLUMS = 2;
+    private static final String CURRENT_SONG = "CURRENT_SONG";
     private RecyclerView mSongList;
     private SongAdapter adapter;
     Boolean isFirstCall = true;
@@ -94,7 +96,8 @@ public class SongsFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 Toast.makeText(getActivity(), "Normal tap", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), SongDetailActivity.class);
-                //intent.putExtra(PHOTO_TRANSFER, flickrRecyclerViewAdapter.getPhoto(position));
+                Song currentSong = adapter.getItemPosition(position);
+                intent.putExtra(CURRENT_SONG, currentSong);
                 startActivity(intent);
             }
 
