@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.archer.retrofittest.R;
 import com.archer.retrofittest.domain.Song;
+import com.archer.retrofittest.ui.holders.BaseGridViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Archer on 1/2/16.
  */
-public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder>{
+public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
 
     Context context;
     ArrayList<Song> mSongsList;
@@ -42,58 +43,20 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
     @Override
-    public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseGridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_song_row, parent, false);
-        return new SongViewHolder(view);
+        return new BaseGridViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(SongViewHolder holder, int position) {
+    public void onBindViewHolder(BaseGridViewHolder holder, int position) {
         Song currentSong = mSongsList.get(position);
         holder.setmName(currentSong.getName());
-        if (currentSong.getUrlSmallImage() != null)
-        {
-            holder.setmImage(currentSong.getUrlSmallImage());
-        } else {
-            holder.setDafaultImage();
-        }
-
+        holder.setmImage(context, currentSong.getUrlSmallImage());
     }
 
     @Override
     public int getItemCount() {
         return mSongsList.size();
-    }
-
-    public class SongViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView mImage;
-        TextView  mTitle;
-
-        public SongViewHolder(View itemView) {
-            super(itemView);
-
-            mImage = (ImageView) itemView.findViewById(R.id.item_image);
-            mTitle = (TextView)  itemView.findViewById(R.id.item_title);
-        }
-
-        public void setmName(String name)
-        {
-            mTitle.setText(name);
-        }
-
-        public void setmImage(String url)
-        {
-            Picasso.with(context)
-                   .load(url)
-                   .placeholder(R.drawable.artist_placeholder)
-                   .into(mImage);
-        }
-
-        public void setDafaultImage(){
-            Picasso.with(context)
-                    .load(R.drawable.artist_placeholder)
-                    .into(mImage);
-        }
     }
 }
