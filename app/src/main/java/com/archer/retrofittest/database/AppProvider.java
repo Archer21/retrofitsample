@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 public class AppProvider extends ContentProvider{
 
@@ -95,11 +96,47 @@ public class AppProvider extends ContentProvider{
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
-    }
+        if (uri == FavoritesContracts.BASE_URI_CONTENT){
+            deleteDatabase();
+            return 0;
+        }
 
+        final SQLiteDatabase database = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+
+        switch (match){
+            case FAVORITES_ID:
+                String id = FavoritesContracts.Favorites.getFavoriteId(uri);
+                String favoritesCriteria = BaseColumns._ID;
+                if (TextUtils.isEmpty(selection)){
+                    favoritesCriteria += " AND (" + selection + ")";
+                }
+                return database.delete(AppDatabase.Tables.FAVORITES, favoritesCriteria, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Unknown Uri: " + uri);
+        }
+
+    }
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase database = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        String selectionCriteria = selection;
+
+        switch (match) {
+            case FAVORITES:
+                return database.update(AppDatabase.Tables.FAVORITES, values, selection, selectionArgs);
+
+            case FAVORITES_ID:
+                String id = FavoritesContracts.Favorites.getFavoriteId(uri);
+                selectionCriteria = BaseColumns._ID + "=" + id;
+                if (!TextUtils.isEmpty(selection)){
+                    selectionCriteria += " AND (" + selection + ")";
+                }
+                return database.update(AppDatabase.Tables.FAVORITES, values, selectionCriteria, selectionArgs);
+
+            default:
+                throw new IllegalArgumentException("Unknown Uri: " + uri);
+        }
     }
 }
