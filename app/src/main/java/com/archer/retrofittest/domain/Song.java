@@ -10,11 +10,6 @@ public class Song implements Parcelable{
     private String urlSmallImage;
     private String urlMediumImage;
 
-
-
-
-    // Getters y Setters
-
     public Song(Parcel in) {
         name = in.readString();
         artistName = in.readString();
@@ -46,6 +41,8 @@ public class Song implements Parcelable{
             return new Song[size];
         }
     };
+
+    // Getters y Setters
 
     public String getName() {
         return name;
