@@ -8,24 +8,19 @@ import android.os.Parcel;
 import android.provider.BaseColumns;
 import android.support.v4.content.AsyncTaskLoader;
 
-import com.archer.retrofittest.database.FavoritesContracts;
 import com.archer.retrofittest.domain.Song;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Archer on 9/2/16.
- */
 public class FavoritesSongsLoader extends AsyncTaskLoader<List<Song>> {
     private List<Song> mSongs;
     private ContentResolver mContentResolver;
     private Cursor mCursor;
 
-    public FavoritesSongsLoader(Context context, ContentResolver mContentResolver, Cursor mCursor) {
+    public FavoritesSongsLoader(Context context, ContentResolver mContentResolver) {
         super(context);
         this.mContentResolver = mContentResolver;
-        this.mCursor = mCursor;
     }
 
 

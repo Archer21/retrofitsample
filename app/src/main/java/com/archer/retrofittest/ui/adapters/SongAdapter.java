@@ -13,6 +13,7 @@ import com.archer.retrofittest.domain.Song;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Archer on 1/2/16.
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder>{
 
     Context context;
-    ArrayList<Song> mSongsList;
+    List<Song> mSongsList;
 
     public SongAdapter(Context context) {
         this.context = context;
@@ -28,7 +29,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
 
-    public void addAll(ArrayList<Song> songs){
+    public void addAll(List<Song> songs){
         if (songs==null)
             throw new NullPointerException("The items cannot by null");
 

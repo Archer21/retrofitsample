@@ -11,19 +11,20 @@ import com.archer.retrofittest.domain.Artist;
 import com.archer.retrofittest.ui.holders.TopArtistViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistViewHolder> {
 
     protected Context context;
-    private ArrayList<Artist> mArtistsList;
+    private List<Artist> mArtistsList;
 
     public TopArtistsAdapter(Context context) {
         this.context = context;
         this.mArtistsList = new ArrayList<>();
     }
 
-    public void addAll(ArrayList<Artist> artists){
+    public void addAll(List<Artist> artists){
         if (artists==null)
             throw new NullPointerException("The items cannot by null");
 
