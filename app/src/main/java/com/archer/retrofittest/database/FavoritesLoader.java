@@ -12,6 +12,7 @@ import android.support.v4.content.AsyncTaskLoader;
 import com.archer.retrofittest.database.FavoritesContract;
 import com.archer.retrofittest.domain.Song;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
@@ -49,5 +50,64 @@ public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
             }
         }
         return entries;
+    }
+
+    @Override
+    public void deliverResult(ArrayList<Song> data) {
+        if (isReset()) {
+            if(data != null) {
+                releaseResults();
+                return;
+            }
+        }
+        ArrayList<Song> oldNotes = mSongs;
+        mSongs = data;
+        if(isStarted()) {
+            super.deliverResult(data);
+        }
+        if(oldNotes != null && oldNotes != data) {
+            releaseResults();
+        }
+    }
+
+    @Override
+    protected void onStartLoading() {
+        if(mSongs != null) {
+            deliverResult(mSongs);
+        }
+        if (takeContentChanged()) {
+            forceLoad();
+        } else if(mSongs == null) {
+            forceLoad();
+        }
+    }
+
+    @Override
+    protected void onStopLoading() {
+        cancelLoad();
+    }
+
+    @Override
+    protected void onReset() {
+        onStopLoading();
+        if(mSongs != null) {
+            releaseResults();
+            mSongs = null;
+        }
+    }
+
+    @Override
+    public void onCanceled(ArrayList<Song> notes) {
+        super.onCanceled(notes);
+        releaseResults();
+    }
+
+    @Override
+    public void forceLoad() {
+        super.forceLoad();
+    }
+
+    private void releaseResults(){
+        mCursor.close();
     }
 }
