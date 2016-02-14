@@ -14,6 +14,7 @@ import com.archer.retrofittest.ui.holders.BaseGridViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Archer on 1/2/16.

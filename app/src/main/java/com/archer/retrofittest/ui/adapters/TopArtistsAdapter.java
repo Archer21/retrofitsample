@@ -11,6 +11,7 @@ import com.archer.retrofittest.domain.Artist;
 import com.archer.retrofittest.ui.holders.TopArtistViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistViewHolder> {

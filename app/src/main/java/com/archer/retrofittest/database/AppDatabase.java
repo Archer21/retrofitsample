@@ -6,12 +6,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 public class AppDatabase extends SQLiteOpenHelper {
-
-    private static final String DATABASE_NAME = "retrofittest.db";
+    private static final String DATABASE_NAME = "amaterasu.db";
     private static final int DATABASE_VERSION = 1;
 
 
-    public interface Tables{
+    interface Tables {
         String FAVORITES = "favorites";
     }
 
@@ -21,13 +20,13 @@ public class AppDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(
-            "CREATE TABLE " + Tables.FAVORITES +
-                "(" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    FavoritesContracts.FavoritesColumns.SONG_IMAGE_URL + " TEXT NOT NULL, " +
-                    FavoritesContracts.FavoritesColumns.SONG_TITLE     + " TEXT NOT NULL" +
-                ");"
-        );
+        db.execSQL("CREATE TABLE " + Tables.FAVORITES + " ("
+                + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + FavoritesContract.FavoritesColumns.FAVORITES_TITLE + " TEXT NOT NULL,"
+                + FavoritesContract.FavoritesColumns.FAVORITES_DESCRIPTION + " TEXT NOT NULL,"
+                + FavoritesContract.FavoritesColumns.FAVORITES_TIME + " TEXT NOT NULL,"
+                + FavoritesContract.FavoritesColumns.FAVORITES_IMAGE + " TEXT NOT NULL,"
+                + FavoritesContract.FavoritesColumns.FAVORITES_DATE + " TEXT NOT NULL)");
     }
 
     @Override
