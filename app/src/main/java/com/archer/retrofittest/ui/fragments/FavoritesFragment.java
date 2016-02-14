@@ -3,6 +3,7 @@ package com.archer.retrofittest.ui.fragments;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -18,6 +19,7 @@ import com.archer.retrofittest.database.FavoritesLoader;
 import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FavoritesFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Song>>{
@@ -44,9 +46,24 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.fragment_favorites_main_container);
         setConfig();
+        setDummieContent();
         return root;
     }
 
+    private void setDummieContent(){
+        ArrayList<Song> dummieSongs = new ArrayList<>();
+        Song masayumeChasing = new Song(Parcel.obtain());
+        masayumeChasing.setName("Masayume Chasing");
+        masayumeChasing.setUrlSmallImage("");
+
+        Song pray = new Song(Parcel.obtain());
+        masayumeChasing.setName("Pray");
+        masayumeChasing.setUrlSmallImage("");
+
+        Song bloodPlus = new Song(Parcel.obtain());
+        masayumeChasing.setName("Aosora no Namida");
+        masayumeChasing.setUrlSmallImage("");
+    }
 
     private void setConfig(){
         mContentResolver = getActivity().getContentResolver();
