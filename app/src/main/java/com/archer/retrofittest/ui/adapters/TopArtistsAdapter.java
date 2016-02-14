@@ -17,14 +17,14 @@ import java.util.List;
 public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistViewHolder> {
 
     protected Context context;
-    private List<Artist> mArtistsList;
+    private ArrayList<Artist> mArtistsList;
 
     public TopArtistsAdapter(Context context) {
         this.context = context;
         this.mArtistsList = new ArrayList<>();
     }
 
-    public void addAll(List<Artist> artists){
+    public void addAll(ArrayList<Artist> artists){
         if (artists==null)
             throw new NullPointerException("The items cannot by null");
 

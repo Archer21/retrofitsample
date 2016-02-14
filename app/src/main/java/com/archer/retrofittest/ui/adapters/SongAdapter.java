@@ -21,7 +21,7 @@ import java.util.List;
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder>{
 
     Context context;
-    List<Song> mSongsList;
+    ArrayList<Song> mSongsList;
 
     public SongAdapter(Context context) {
         this.context = context;
@@ -29,7 +29,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
 
-    public void addAll(List<Song> songs){
+    public void addAll(ArrayList<Song> songs){
         if (songs==null)
             throw new NullPointerException("The items cannot by null");
 
