@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.archer.retrofittest.R;
-import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
-import java.util.ArrayList;
 
 public class FavoritesFragment extends Fragment{
 
