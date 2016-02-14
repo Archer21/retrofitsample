@@ -3,6 +3,8 @@
     package="com.archer.retrofittest">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +25,14 @@
         <activity
             android:name=".activity.SongDetailActivity"
             android:label="@string/title_activity_song_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <provider
+            android:name=".database.AppProvider"
+            android:authorities="com.archer.retrofittest.database.contracts"
+            android:exported="true"
+            android:readPermission="com.archer.retrofittest.database.contracts.READWRITE"
+            android:writePermission="com.archer.retrofittest.database.contracts.READWRITE" />
     </application>
 
 </manifest>
