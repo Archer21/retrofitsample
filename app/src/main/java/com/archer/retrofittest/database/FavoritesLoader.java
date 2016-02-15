@@ -6,13 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.provider.BaseColumns;
-import android.provider.SyncStateContract;
 import android.support.v4.content.AsyncTaskLoader;
-
-import com.archer.retrofittest.database.FavoritesContract;
 import com.archer.retrofittest.domain.Song;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
@@ -34,7 +29,7 @@ public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
                 FavoritesContract.FavoritesColumns.FAVORITES_TITLE
         };
         Uri uri = FavoritesContract.URI_TABLE;
-        String sortById = BaseColumns._ID + "DESC";
+        String sortById = BaseColumns._ID + " DESC";
         mCursor = mContentresolver.query(uri, projection, null, null, sortById);
         if (mCursor != null){
             if (mCursor.moveToFirst()){
