@@ -9,9 +9,10 @@ import android.provider.BaseColumns;
 import android.support.v4.content.AsyncTaskLoader;
 import com.archer.retrofittest.domain.Song;
 import java.util.ArrayList;
+import java.util.List;
 
-public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
-    private ArrayList<Song> mSongs;
+public class FavoritesLoader extends AsyncTaskLoader<List<Song>> {
+    private List<Song> mSongs;
     private ContentResolver mContentresolver;
     private Cursor mCursor;
 
@@ -21,8 +22,8 @@ public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
     }
 
     @Override
-    public ArrayList<Song> loadInBackground() {
-        ArrayList<Song> entries = new ArrayList<>();
+    public List<Song> loadInBackground() {
+        List<Song> entries = new ArrayList<>();
         String[] projection = {
                 BaseColumns._ID,
                 FavoritesContract.FavoritesColumns.FAVORITES_IMAGE,
@@ -48,14 +49,14 @@ public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
     }
 
     @Override
-    public void deliverResult(ArrayList<Song> data) {
+    public void deliverResult(List<Song> data) {
         if (isReset()) {
             if(data != null) {
                 releaseResults();
                 return;
             }
         }
-        ArrayList<Song> oldNotes = mSongs;
+        List<Song> oldNotes = mSongs;
         mSongs = data;
         if(isStarted()) {
             super.deliverResult(data);
@@ -92,7 +93,7 @@ public class FavoritesLoader extends AsyncTaskLoader<ArrayList<Song>> {
     }
 
     @Override
-    public void onCanceled(ArrayList<Song> notes) {
+    public void onCanceled(List<Song> notes) {
         super.onCanceled(notes);
         releaseResults();
     }

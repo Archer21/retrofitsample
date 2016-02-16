@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +18,21 @@ import android.view.ViewGroup;
 import com.archer.retrofittest.R;
 import com.archer.retrofittest.database.FavoritesLoader;
 import com.archer.retrofittest.domain.Song;
+import com.archer.retrofittest.ui.adapters.FavoritesAdapter;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
-public class FavoritesFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Song>>{
+public class FavoritesFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Song>>{
 
     private static final int NUM_COLS = 4;
     private RecyclerView mRecyclerView;
-    private SongAdapter  mSongAdapter;
+    private FavoritesAdapter mFavoritesAdapter;
     private ContentResolver mContentResolver;
     private static final int LOADER_ID = 1;
-    private ArrayList<Song> mData;
+    private List<Song> mData;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -38,7 +41,8 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSongAdapter = new SongAdapter(getActivity());
+        mData = new ArrayList<>();
+        mFavoritesAdapter = new FavoritesAdapter(getActivity());
     }
 
     @Override
@@ -46,23 +50,29 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.fragment_favorites_main_container);
         setConfig();
-//        setDummieContent();
         return root;
     }
 
 //    private void setDummieContent(){
-//        ArrayList<Song> dummieSongs = new ArrayList<>();
+//        List<Song> dummieSongs = new ArrayList<>();
 //        Song masayumeChasing = new Song(Parcel.obtain());
 //        masayumeChasing.setName("Masayume Chasing");
-//        masayumeChasing.setUrlSmallImage("");
+//        masayumeChasing.setUrlSmallImage("http://40.media.tumblr.com/d588a3da1d3a96dedae4cefb42337a23/tumblr_n9auqslLue1tvlvpyo7_500.jpg");
 //
 //        Song pray = new Song(Parcel.obtain());
-//        masayumeChasing.setName("Pray");
-//        masayumeChasing.setUrlSmallImage("");
+//        pray.setName("Pray");
+//        pray.setUrlSmallImage("http://vignette3.wikia.nocookie.net/lyricwiki/images/5/5b/Tommy_Heavenly6_-_Hey_My_Friend.jpg/revision/latest?cb=20090616001310");
 //
-//        Song bloodPlus = new Song(Parcel.obtain());
-//        masayumeChasing.setName("Aosora no Namida");
-//        masayumeChasing.setUrlSmallImage("");
+//        Song kizuna = new Song(Parcel.obtain());
+//        kizuna.setName("Kizuna ni nosete");
+//        kizuna.setUrlSmallImage("https://kuromisub.files.wordpress.com/2015/07/6278e-hayamiwhv-1000572325.jpg");
+//
+//        dummieSongs.add(masayumeChasing);
+//        dummieSongs.add(pray);
+//        dummieSongs.add(kizuna);
+//
+//        mFavoritesAdapter.setData(dummieSongs);
+//        mFavoritesAdapter.notifyDataSetChanged();
 //    }
 
     private void setConfig(){
@@ -70,18 +80,18 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
         setHasOptionsMenu(true);
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), NUM_COLS));
-        mRecyclerView.setAdapter(mSongAdapter);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLS));
+        mRecyclerView.setAdapter(mFavoritesAdapter);
     }
 
     @Override
-    public Loader<ArrayList<Song>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<Song>> onCreateLoader(int id, Bundle args) {
         mContentResolver = getActivity().getContentResolver();
         return new FavoritesLoader(getActivity(), mContentResolver);
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<Song>> loader, final ArrayList<Song> data) {
+    public void onLoadFinished(Loader<List<Song>> loader, final List<Song> data) {
 //        Ease implementation first
 
 //        this.mData = data;
@@ -95,13 +105,13 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 //            }
 //        });
 
-        mSongAdapter.setData(data);
+        mFavoritesAdapter.setData(data);
         mData = data;
     }
 
     @Override
-    public void onLoaderReset(Loader<ArrayList<Song>> loader) {
-        mSongAdapter.setData(null);
+    public void onLoaderReset(Loader<List<Song>> loader) {
+        mFavoritesAdapter.setData(null);
     }
 }
 
