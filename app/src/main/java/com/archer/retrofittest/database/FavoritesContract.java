@@ -5,11 +5,11 @@ import android.provider.BaseColumns;
 
 public class FavoritesContract {
     interface FavoritesColumns {
-        String FAVORITES_ID = "_ID";
+//        String FAVORITES_ID = "_ID";
         String FAVORITES_TITLE = "favorites_title";
-        String FAVORITES_DESCRIPTION = "favorites_description";
-        String FAVORITES_DATE = "favorites_date";
-        String FAVORITES_TIME = "favorites_time";
+//        String FAVORITES_DESCRIPTION = "favorites_description";
+//        String FAVORITES_DATE = "favorites_date";
+//        String FAVORITES_TIME = "favorites_time";
         String FAVORITES_IMAGE = "favorites_image";
     }
 

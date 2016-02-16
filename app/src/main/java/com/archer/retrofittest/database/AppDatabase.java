@@ -24,11 +24,11 @@ public class AppDatabase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + Tables.FAVORITES + "("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + FavoritesContract.FavoritesColumns.FAVORITES_TITLE + " TEXT NOT NULL,"
-                + FavoritesContract.FavoritesColumns.FAVORITES_DESCRIPTION + " TEXT NOT NULL,"
-                + FavoritesContract.FavoritesColumns.FAVORITES_TIME + " TEXT NOT NULL,"
-                + FavoritesContract.FavoritesColumns.FAVORITES_IMAGE + " TEXT NOT NULL,"
-                + FavoritesContract.FavoritesColumns.FAVORITES_DATE + " TEXT NOT NULL)");
+                + FavoritesContract.FavoritesColumns.FAVORITES_IMAGE + " TEXT NOT NULL)");
     }
+//                + FavoritesContract.FavoritesColumns.FAVORITES_DESCRIPTION + " TEXT NOT NULL,"
+//                + FavoritesContract.FavoritesColumns.FAVORITES_TIME + " TEXT NOT NULL,"
+//                + FavoritesContract.FavoritesColumns.FAVORITES_DATE + " TEXT NOT NULL)");}
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

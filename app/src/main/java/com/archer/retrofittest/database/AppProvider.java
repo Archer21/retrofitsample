@@ -11,6 +11,7 @@ import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 public class AppProvider extends ContentProvider {
     protected AppDatabase mOpenHelper;
@@ -78,17 +79,19 @@ public class AppProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
-        final SQLiteDatabase database = mOpenHelper.getWritableDatabase();
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
 
+        Log.v("AppProvider", "insert(uri=" + uri + ", values=" + values.toString());
         switch (match){
             case FAVORITES:
-                long favoriterecodId = database.insertOrThrow(AppDatabase.Tables.FAVORITES, null, values);
-                return FavoritesContract.Favorites.buildFavoriteUri(String.valueOf(favoriterecodId));
+                long recordId = db.insertOrThrow(AppDatabase.Tables.FAVORITES, null, values);
+                return FavoritesContract.Favorites.buildFavoriteUri(String.valueOf(recordId));
             default:
                 throw new IllegalArgumentException("Unknown Uri: " + uri);
         }
     }
+
 
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {

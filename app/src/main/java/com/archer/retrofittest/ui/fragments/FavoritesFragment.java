@@ -46,24 +46,24 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.fragment_favorites_main_container);
         setConfig();
-        setDummieContent();
+//        setDummieContent();
         return root;
     }
 
-    private void setDummieContent(){
-        ArrayList<Song> dummieSongs = new ArrayList<>();
-        Song masayumeChasing = new Song(Parcel.obtain());
-        masayumeChasing.setName("Masayume Chasing");
-        masayumeChasing.setUrlSmallImage("");
-
-        Song pray = new Song(Parcel.obtain());
-        masayumeChasing.setName("Pray");
-        masayumeChasing.setUrlSmallImage("");
-
-        Song bloodPlus = new Song(Parcel.obtain());
-        masayumeChasing.setName("Aosora no Namida");
-        masayumeChasing.setUrlSmallImage("");
-    }
+//    private void setDummieContent(){
+//        ArrayList<Song> dummieSongs = new ArrayList<>();
+//        Song masayumeChasing = new Song(Parcel.obtain());
+//        masayumeChasing.setName("Masayume Chasing");
+//        masayumeChasing.setUrlSmallImage("");
+//
+//        Song pray = new Song(Parcel.obtain());
+//        masayumeChasing.setName("Pray");
+//        masayumeChasing.setUrlSmallImage("");
+//
+//        Song bloodPlus = new Song(Parcel.obtain());
+//        masayumeChasing.setName("Aosora no Namida");
+//        masayumeChasing.setUrlSmallImage("");
+//    }
 
     private void setConfig(){
         mContentResolver = getActivity().getContentResolver();

@@ -61,16 +61,16 @@ public class SongDetailActivity extends AppCompatActivity {
 
     public void addToFavorites(View view){
         ContentValues contentValues = new ContentValues();
+        mContentResolver = this.getContentResolver();
+        Uri uri = FavoritesContract.URI_TABLE;
         String title = myCurrentSong.getName();
         String image = myCurrentSong.getUrlSmallImage();
         contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
         contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
-        ContentResolver cr = this.getContentResolver();
-        Uri uri = FavoritesContract.URI_TABLE;
-//        cr.insert(uri, contentValues);
+        mContentResolver.insert(uri, contentValues);
         Log.e(LOG_TAG, title);
         Log.e(LOG_TAG, image);
-        Log.e(LOG_TAG, cr.toString());
+        Log.e(LOG_TAG, mContentResolver.toString());
         Log.e(LOG_TAG, uri.toString());
         Toast.makeText(getApplicationContext(), "Add to favorites", Toast.LENGTH_SHORT).show();
     }
