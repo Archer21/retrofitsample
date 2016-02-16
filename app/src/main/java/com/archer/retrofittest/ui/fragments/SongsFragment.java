@@ -89,12 +89,11 @@ public class SongsFragment extends Fragment {
         mSongList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMS));
         mSongList.setAdapter(adapter);
         mSongList.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.integer.offset));
-        mSongList.setItemAnimator(new DefaultItemAnimator());
         mSongList.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 mSongList, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Toast.makeText(getActivity(), "Normal tap", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Normal tap", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), SongDetailActivity.class);
                 Song currentSong = adapter.getItemPosition(position);
                 intent.putExtra(CURRENT_SONG, currentSong);
@@ -103,7 +102,7 @@ public class SongsFragment extends Fragment {
 
             @Override
             public void onItemLongClick(View view, int position) {
-//                Toast.makeText(getActivity(), "Long tap", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Long tap", Toast.LENGTH_SHORT).show();
                 //intent.putExtra(PHOTO_TRANSFER, flickrRecyclerViewAdapter.getPhoto(position));
             }
         }));
