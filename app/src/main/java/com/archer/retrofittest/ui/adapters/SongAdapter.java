@@ -23,6 +23,7 @@ public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
 
     Context context;
     ArrayList<Song> mSongsList;
+    ArrayList<Song> mFavoriteLists;
 
     public SongAdapter(Context context) {
         this.context = context;
@@ -35,6 +36,11 @@ public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
             throw new NullPointerException("The items cannot by null");
 
         this.mSongsList.addAll(songs);
+        notifyDataSetChanged();
+    }
+
+    public void setData(ArrayList<Song> favorites) {
+        this.mFavoriteLists = favorites;
         notifyDataSetChanged();
     }
 

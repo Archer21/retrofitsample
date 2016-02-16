@@ -27,7 +27,7 @@ public class FavoritesContract {
         }
 
         public static String getFavoriteId(Uri uri) {
-            return uri.getPathSegments().get(1);
+            return uri.getLastPathSegment();
         }
 
 

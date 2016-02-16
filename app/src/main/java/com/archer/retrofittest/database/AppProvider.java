@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-
 public class AppProvider extends ContentProvider {
     protected AppDatabase mOpenHelper;
     public static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -23,8 +22,8 @@ public class AppProvider extends ContentProvider {
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         String authority = FavoritesContract.CONTENT_AUTHORITY;
-        matcher.addURI(authority, "notes", FAVORITES);
-        matcher.addURI(authority, "notes/*", FAVORITES_ID);
+        matcher.addURI(authority, "favorites", FAVORITES);
+        matcher.addURI(authority, "favorites/*", FAVORITES_ID);
         return matcher;
     }
 

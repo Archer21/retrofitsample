@@ -95,13 +95,13 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 //            }
 //        });
 
-        mSongAdapter.addAll(data);
+        mSongAdapter.setData(data);
         mData = data;
     }
 
     @Override
     public void onLoaderReset(Loader<ArrayList<Song>> loader) {
-        mSongAdapter.addAll(null);
+        mSongAdapter.setData(null);
     }
 }
 
