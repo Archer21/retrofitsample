@@ -7,7 +7,6 @@ import android.widget.Toast;
  */
 public class DatabaseConstants {
     private void insertFavorite(){
-        isFavorite = 1;
         // Usando los datos de la cancion guardada ejecutamos un insert con esos datos
 //        ContentValues contentValues = new ContentValues();
 //        mContentResolver = this.getContentResolver();
@@ -17,11 +16,9 @@ public class DatabaseConstants {
 //        contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
 //        contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
 //        mContentResolver.insert(uri, contentValues);
-        Toast.makeText(getApplicationContext(), "Add to favorites", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteFavorite(){
-        isFavorite = 0;
 //        ContentResolver cr = this.getContentResolver();
 //        String _ID = ;
 //        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);

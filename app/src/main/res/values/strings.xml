@@ -9,5 +9,6 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="title_activity_song_detail">SongDetailActivity</string>
-    <string name="action_delete">Delete Favorite</string>
+    <string name="add_favorite">Add to favorites</string>
+    <string name="delete_favorite">Delete Favorite</string>
 </resources>
