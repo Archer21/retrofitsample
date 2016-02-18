@@ -9,12 +9,14 @@ public class Song implements Parcelable{
     private String artistName;
     private String urlSmallImage;
     private String urlMediumImage;
+    private int isFavorite;
 
     public Song(Parcel in) {
         name = in.readString();
         artistName = in.readString();
         urlSmallImage = in.readString();
         urlMediumImage = in.readString();
+        isFavorite = in.readInt();
     }
 
     @Override
@@ -23,6 +25,7 @@ public class Song implements Parcelable{
         dest.writeString(artistName);
         dest.writeString(urlSmallImage);
         dest.writeString(urlMediumImage);
+        dest.writeInt(isFavorite);
     }
 
     @Override
@@ -50,6 +53,7 @@ public class Song implements Parcelable{
 
     public void setName(String name) {
         this.name = name;
+
     }
 
     public String getUrlSmallImage() {
@@ -74,5 +78,13 @@ public class Song implements Parcelable{
 
     public void setArtistName(String artistName) {
         this.artistName = artistName;
+    }
+
+    public int getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(int isFavorite) {
+        this.isFavorite = isFavorite;
     }
 }
