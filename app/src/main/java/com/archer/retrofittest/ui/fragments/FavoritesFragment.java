@@ -2,6 +2,7 @@ package com.archer.retrofittest.ui.fragments;
 
 
 import android.content.ContentResolver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
@@ -10,16 +11,22 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.archer.retrofittest.R;
+import com.archer.retrofittest.database.FavoritesContract;
 import com.archer.retrofittest.database.FavoritesLoader;
 import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.ui.adapters.FavoritesAdapter;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
+import com.archer.retrofittest.ui.utils.RecyclerItemClickListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -82,6 +89,42 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLS));
         mRecyclerView.setAdapter(mFavoritesAdapter);
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), view.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(final View view, int position) {
+                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
+                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+
+                final View v = view;
+                final int pos = position;
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(getActivity(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                        delete(v, pos);
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        }));
+    }
+
+    public void delete(View view, int position){
+        ContentResolver cr = getActivity().getContentResolver();
+        String title = ((TextView) view.findViewById(R.id.favorite_title)).getText().toString();
+        Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
+//        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+//        cr.delete(uri, null, null);
+//        mNotesAdapter.delete(position);
+//        changeNoItemTag();
     }
 
     @Override
@@ -111,7 +154,8 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public void onLoaderReset(Loader<List<Song>> loader) {
-        mFavoritesAdapter.setData(null);
+        List<Song> placeholderArray = new ArrayList<>();
+        mFavoritesAdapter.setData(placeholderArray);
     }
 }
 
