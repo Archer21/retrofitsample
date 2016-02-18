@@ -5,27 +5,28 @@ import android.os.Parcelable;
 
 public class Song implements Parcelable{
 
+    private int id;
     private String name;
     private String artistName;
     private String urlSmallImage;
     private String urlMediumImage;
-    private int isFavorite;
+    public static boolean isFavorite;
 
     public Song(Parcel in) {
+        id   = in.readInt();
         name = in.readString();
         artistName = in.readString();
         urlSmallImage = in.readString();
         urlMediumImage = in.readString();
-        isFavorite = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(artistName);
         dest.writeString(urlSmallImage);
         dest.writeString(urlMediumImage);
-        dest.writeInt(isFavorite);
     }
 
     @Override
@@ -46,6 +47,14 @@ public class Song implements Parcelable{
     };
 
     // Getters y Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -80,11 +89,11 @@ public class Song implements Parcelable{
         this.artistName = artistName;
     }
 
-    public int getIsFavorite() {
+    public boolean getIsFavorite() {
         return isFavorite;
     }
 
-    public void setIsFavorite(int isFavorite) {
+    public void setIsFavorite(boolean isFavorite) {
         this.isFavorite = isFavorite;
     }
 }

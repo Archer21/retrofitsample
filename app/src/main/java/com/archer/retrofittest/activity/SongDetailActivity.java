@@ -24,14 +24,15 @@ public class SongDetailActivity extends AppCompatActivity {
 
     private static final String CURRENT_SONG = "CURRENT_SONG";
     private static final String LOG_TAG = SongDetailActivity.class.getSimpleName();
+    private int id;
+    private boolean isFavorite;
 
     private TextView  songNameDetail;
     private ImageView photoArtist;
     private ImageView songCover;
     private Button    addFavorite;
-    private Song myCurrentSong;
     private ContentResolver mContentResolver;
-    int isFavorite = 0;
+    //    private Song myCurrentSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,12 @@ public class SongDetailActivity extends AppCompatActivity {
         addFavorite     = (Button)    findViewById(R.id.add_to_favorites);
 
         // Recibimos el objeto por medio de getParcelable
-        Song detailSong = getIntent().getParcelableExtra(CURRENT_SONG);
-        String artistName = detailSong.getArtistName();
-        String photo  = detailSong.getUrlSmallImage();
-        String cover = detailSong.getUrlMediumImage();
-        detailSong.setIsFavorite(isFavorite);
+        Song detailSong   = getIntent().getParcelableExtra(CURRENT_SONG);
 
+        id                = detailSong.getId();
+        String artistName = detailSong.getArtistName();
+        String photo      = detailSong.getUrlSmallImage();
+        String cover      = detailSong.getUrlMediumImage();
         // posteriormente llenamos los datos
         // de la cancion
         songNameDetail.setText(artistName);
@@ -67,10 +68,9 @@ public class SongDetailActivity extends AppCompatActivity {
 
     public void addToFavorites(View view){
 //        isFavorite = myCurrentSong.getIsFavorite();
-        if (isFavorite == 0){
+        if ( == 0){
             addFavorite.setText("Remove to Favorites");
             Toast.makeText(getApplicationContext(), String.valueOf(isFavorite), Toast.LENGTH_SHORT).show();
-            insertFavorite();
         } else {
             addFavorite.setText("Add to Favorites");
             Toast.makeText(getApplicationContext(), String.valueOf(isFavorite), Toast.LENGTH_SHORT).show();
@@ -102,7 +102,9 @@ public class SongDetailActivity extends AppCompatActivity {
 //        cr.delete(uri, null, null);
     }
 
-    public void setPhoto(String url) {
+
+    // Metodos para establecer la UI
+    private void setPhoto(String url) {
         Picasso.with(SongDetailActivity.this)
                 .load(url)
                 .placeholder(R.drawable.artist_placeholder)
@@ -110,7 +112,7 @@ public class SongDetailActivity extends AppCompatActivity {
                 .into(photoArtist);
     }
 
-    public void setCover(String url) {
+    private void setCover(String url) {
         Picasso.with(SongDetailActivity.this)
                 .load(url)
                 .placeholder(R.drawable.artist_placeholder)
