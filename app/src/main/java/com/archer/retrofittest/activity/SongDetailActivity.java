@@ -31,6 +31,7 @@ public class SongDetailActivity extends AppCompatActivity {
     private Button    addFavorite;
     private Song myCurrentSong;
     private ContentResolver mContentResolver;
+    int isFavorite = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,40 +40,66 @@ public class SongDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        Song detailSong = getIntent().getParcelableExtra(CURRENT_SONG);
         songNameDetail  = (TextView)  findViewById(R.id.songNameDetail);
         photoArtist     = (ImageView) findViewById(R.id.photo);
         songCover       = (ImageView) findViewById(R.id.cover);
-        addFavorite  = (Button)    findViewById(R.id.add_to_favorites);
+        addFavorite     = (Button)    findViewById(R.id.add_to_favorites);
 
-
+        // Recibimos el objeto por medio de getParcelable
+        Song detailSong = getIntent().getParcelableExtra(CURRENT_SONG);
         String artistName = detailSong.getArtistName();
         String photo  = detailSong.getUrlSmallImage();
         String cover = detailSong.getUrlMediumImage();
+        detailSong.setIsFavorite(isFavorite);
 
+        // posteriormente llenamos los datos
+        // de la cancion
+        songNameDetail.setText(artistName);
         setPhoto(photo);
         setCover(cover);
 
-        songNameDetail.setText(artistName);
-
-        myCurrentSong = detailSong;
+////         Guardamos los datos que recibimos en un objeto tipo cancion
+        // Viendolo bien no necesita guardarlo en un nuevo objeto
+        // puesto que los valores ya estan puestos en nuestros widgets
+//        myCurrentSong = detailSong;
+//        isFavorite = myCurrentSong.getIsFavorite();
     }
 
     public void addToFavorites(View view){
-        ContentValues contentValues = new ContentValues();
-        mContentResolver = this.getContentResolver();
-        Uri uri = FavoritesContract.URI_TABLE;
-        String title = myCurrentSong.getName();
-        String image = myCurrentSong.getUrlSmallImage();
-        contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
-        contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
-        mContentResolver.insert(uri, contentValues);
-        Log.e(LOG_TAG, title);
-        Log.e(LOG_TAG, image);
-        Log.e(LOG_TAG, mContentResolver.toString());
-        Log.e(LOG_TAG, uri.toString());
+//        isFavorite = myCurrentSong.getIsFavorite();
+        if (isFavorite == 0){
+            addFavorite.setText("Remove to Favorites");
+            Toast.makeText(getApplicationContext(), String.valueOf(isFavorite), Toast.LENGTH_SHORT).show();
+            insertFavorite();
+        } else {
+            addFavorite.setText("Add to Favorites");
+            Toast.makeText(getApplicationContext(), String.valueOf(isFavorite), Toast.LENGTH_SHORT).show();
+            deleteFavorite();
+        }
+    }
+    private void insertFavorite(){
+        isFavorite = 1;
+//      Usando los datos de la cancion guardada ejecutamos un insert con esos datos
+//        Guardaremos el id en una variable key/value sharedPreference
+//        ContentValues contentValues = new ContentValues();
+//        mContentResolver = this.getContentResolver();
+//        Uri uri = FavoritesContract.URI_TABLE;
+//        String title = myCurrentSong.getName();
+//        String image = myCurrentSong.getUrlSmallImage();
+//        contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
+//        contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
+//        mContentResolver.insert(uri, contentValues);
         Toast.makeText(getApplicationContext(), "Add to favorites", Toast.LENGTH_SHORT).show();
+    }
+
+    private void deleteFavorite(){
+        isFavorite = 0;
+//        ContentResolver cr = this.getContentResolver();
+//        Al momento de borrar el favorito accedemos a la sharedPreference con la key del id del favorito
+//        y procederemos a eliminar esa sharedPreference
+//        String _ID = ;
+//        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+//        cr.delete(uri, null, null);
     }
 
     public void setPhoto(String url) {

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,7 +19,7 @@ import com.archer.retrofittest.io.apiadapters.SongApiAdapter;
 import com.archer.retrofittest.io.model.SongResponse;
 import com.archer.retrofittest.ui.ItemOffsetDecoration;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
-import com.archer.retrofittest.ui.utils.RecyclerItemClickListener;
+import com.archer.retrofittest.ui.uiutils.RecyclerItemClickListener;
 
 
 import retrofit2.Call;

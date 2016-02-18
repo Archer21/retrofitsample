@@ -2,15 +2,12 @@ package com.archer.retrofittest.ui.fragments;
 
 
 import android.content.ContentResolver;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,14 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.archer.retrofittest.R;
-import com.archer.retrofittest.database.FavoritesContract;
 import com.archer.retrofittest.database.FavoritesLoader;
 import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.ui.adapters.FavoritesAdapter;
-import com.archer.retrofittest.ui.adapters.SongAdapter;
-import com.archer.retrofittest.ui.utils.RecyclerItemClickListener;
+import com.archer.retrofittest.ui.uiutils.RecyclerItemClickListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,7 +91,7 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 
             @Override
             public void onItemLongClick(final View view, int position) {
-                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
                 PopupMenu popupMenu = new PopupMenu(getActivity(), view);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
 
@@ -107,7 +101,7 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(getActivity(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
                         delete(v, pos);
                         return true;
                     }
