@@ -26,10 +26,6 @@ import com.squareup.picasso.Picasso;
 public class SongDetailActivity extends AppCompatActivity {
 
     private static final String CURRENT_SONG = "CURRENT_SONG";
-    public static final String PREFS_NAME = "FAVORITES";
-    public  final String INSERT_FAVORITE = SongDetailActivity.this.getResources().getString(R.string.add_favorite);
-    public  final String DELETE_FAVORITE = SongDetailActivity.this.getResources().getString(R.string.delete_favorite);
-
     private static final String LOG_TAG = SongDetailActivity.class.getSimpleName();
     private int songId;
 
@@ -64,27 +60,40 @@ public class SongDetailActivity extends AppCompatActivity {
         String cover      = detailSong.getUrlMediumImage();
         // posteriormente llenamos los datos
         // de la cancion
-        Log.d(LOG_TAG, String.valueOf(songId));
         songNameDetail.setText(artistName);
         setPhoto(photo);
         setCover(cover);
 
         // Favorites
         isFavorite = FavoritesPreferences.getFavoriteId(SongDetailActivity.this, favoriteSongId);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isFavorite){
+            addFavorite.setText("Delete from Favorites");
+        } else {
+            addFavorite.setText("Save on Favorites");
+        }
     }
 
     // Shared Preferences
 
     public void addToFavorites(View view){
-        if (isFavorite){
-            addFavorite.setText(DELETE_FAVORITE);
+        if (!isFavorite){
             FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
-            Log.d(LOG_TAG, "The id is " + favoriteSongId + " " + String.valueOf(isFavorite));
+            insertFavorite();
+            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+            addFavorite.setText("Delete from Favorites");
+            Log.e(LOG_TAG, "The id " + favoriteSongId + " is " + String.valueOf(isFavorite));
+
         } else {
-            addFavorite.setText(INSERT_FAVORITE);
-            Log.d(LOG_TAG, "The id is " + favoriteSongId + " " + String.valueOf(isFavorite));
+            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
             deleteFavorite();
+            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+            addFavorite.setText("Save on Favorites");
+            Log.e(LOG_TAG, "The id is " + favoriteSongId + " " + String.valueOf(isFavorite));
         }
     }
     private void insertFavorite(){
@@ -96,7 +105,7 @@ public class SongDetailActivity extends AppCompatActivity {
 //        contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
 //        contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
 //        mContentResolver.insert(uri, contentValues);
-        Toast.makeText(getApplicationContext(), "Add to favorites", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Added to favorites", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteFavorite(){
@@ -106,6 +115,8 @@ public class SongDetailActivity extends AppCompatActivity {
 //        String _ID = ;
 //        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
 //        cr.delete(uri, null, null);
+        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
+
     }
 
 

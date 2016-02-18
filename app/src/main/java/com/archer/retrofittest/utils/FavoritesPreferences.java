@@ -23,4 +23,12 @@ public class FavoritesPreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(id, false);
     }
+
+    public static void deleteFavoriteId(Context context, String id) {
+        SharedPreferences preferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(id);
+        editor.apply();
+    }
 }
