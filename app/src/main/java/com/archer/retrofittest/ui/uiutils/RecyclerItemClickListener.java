@@ -1,4 +1,4 @@
-package com.archer.retrofittest.ui.utils;
+package com.archer.retrofittest.ui.uiutils;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
