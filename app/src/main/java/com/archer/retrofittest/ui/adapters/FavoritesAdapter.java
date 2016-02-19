@@ -40,6 +40,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     @Override
     public void onBindViewHolder(FavoritesViewHolder holder, int position) {
         Song currentSong = mFavoritesList.get(position);
+        holder.setmId(currentSong.getId());
         holder.setmTitle(currentSong.getName());
         holder.setmImage(context, currentSong.getUrlSmallImage());
     }

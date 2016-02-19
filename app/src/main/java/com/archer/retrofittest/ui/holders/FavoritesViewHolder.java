@@ -9,20 +9,22 @@ import android.widget.TextView;
 import com.archer.retrofittest.R;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by Archer on 15/2/16.
- */
 public class FavoritesViewHolder extends RecyclerView.ViewHolder {
 
+    private TextView  mId;
     private TextView  mTitle;
     private ImageView mImage;
 
     public FavoritesViewHolder(View itemView) {
         super(itemView);
+        mId    = (TextView)  itemView.findViewById(R.id.item_id);
         mTitle = (TextView)  itemView.findViewById(R.id.favorite_title);
         mImage = (ImageView) itemView.findViewById(R.id.favorite_image);
     }
 
+    public void setmId(int id){
+        mId.setText(String.valueOf(id));
+    }
     public void setmTitle(String title){
         mTitle.setText(title);
     }

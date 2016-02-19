@@ -28,8 +28,8 @@ public class SongDetailActivity extends AppCompatActivity {
     private static final String CURRENT_SONG = "CURRENT_SONG";
     private static final String LOG_TAG = SongDetailActivity.class.getSimpleName();
     private int songId;
-
     private String favoriteSongId;
+
     private TextView  songNameDetail;
     private ImageView photoArtist;
     private ImageView songCover;
@@ -112,7 +112,7 @@ public class SongDetailActivity extends AppCompatActivity {
             mContentResolver.insert(uri, contentValues);
             FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
             isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
-//        Toast.makeText(getApplicationContext(), "Added to favorites", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Added to favorites", Toast.LENGTH_SHORT).show();
         }
 
     }

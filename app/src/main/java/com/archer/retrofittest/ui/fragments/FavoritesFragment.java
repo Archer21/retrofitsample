@@ -2,6 +2,7 @@ package com.archer.retrofittest.ui.fragments;
 
 
 import android.content.ContentResolver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,10 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.archer.retrofittest.R;
+import com.archer.retrofittest.database.FavoritesContract;
 import com.archer.retrofittest.database.FavoritesLoader;
 import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.ui.adapters.FavoritesAdapter;
 import com.archer.retrofittest.ui.uiutils.RecyclerItemClickListener;
+import com.archer.retrofittest.utils.FavoritesPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,13 +115,16 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
     }
 
     public void delete(View view, int position){
-        ContentResolver cr = getActivity().getContentResolver();
+        String _ID = ((TextView) view.findViewById(R.id.item_id)).getText().toString();
         String title = ((TextView) view.findViewById(R.id.favorite_title)).getText().toString();
-        Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "id: " + _ID + ", title: " + title, Toast.LENGTH_SHORT).show();
+//        ContentResolver cr = getActivity().getContentResolver();
+//        String _ID = FavoritesPreferences.getFavoriteId();
 //        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
 //        cr.delete(uri, null, null);
-//        mNotesAdapter.delete(position);
-//        changeNoItemTag();
+//        FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
+//        isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+//        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -15,11 +15,13 @@
         android:layout_height="25dp"
         android:src="@android:drawable/star_big_on"/>
 
-    <!--<TextView-->
-        <!--android:id="@+id/item_id"-->
-        <!--android:visibility="gone"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp" />-->
+    <!--Campo auxiliar para guardar el id-->
+    <!--optimizacion pendiente-->
+    <TextView
+        android:id="@+id/item_id"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 
     <ImageView
         android:id="@+id/favorite_image"
