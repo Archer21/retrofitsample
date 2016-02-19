@@ -95,21 +95,21 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
             @Override
             public void onItemLongClick(final View view, int position) {
 //                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
-                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-
-                final View v = view;
-                final int pos = position;
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-//                        Toast.makeText(getActivity(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
-                        delete(v, pos);
-                        return false;
-                    }
-                });
-                popupMenu.show();
+//                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+//                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+//
+//                final View v = view;
+//                final int pos = position;
+//
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem item) {
+////                        Toast.makeText(getActivity(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+//                        delete(v, pos);
+//                        return false;
+//                    }
+//                });
+//                popupMenu.show();
             }
         }));
     }

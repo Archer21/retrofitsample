@@ -51,6 +51,11 @@ public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
 
     @Override
     public void onBindViewHolder(BaseGridViewHolder holder, int position) {
+//        Me parece que aca podemos modificar cada item
+//        if (position == 0){
+//            int layoutWidth = RecyclerView.LayoutParams.MATCH_PARENT;
+//            int layoutHeight = 200;
+//        }
         Song currentSong = mSongsList.get(position);
 //        holder.setSongId(currentSong.getId());
         holder.setmName(currentSong.getName());
@@ -61,4 +66,5 @@ public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
     public int getItemCount() {
         return mSongsList.size();
     }
+
 }
