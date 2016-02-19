@@ -35,7 +35,7 @@ public class SongsFragment extends Fragment {
     private static final String CURRENT_SONG = "CURRENT_SONG";
     private RecyclerView mSongList;
     private SongAdapter adapter;
-    Boolean isFirstCall = true;
+    private boolean isFirstCall = true;
 
     public SongsFragment() {
         // Required empty public constructor
@@ -99,6 +99,7 @@ public class SongsFragment extends Fragment {
                 Song currentSong = adapter.getItemPosition(position);
                 intent.putExtra(CURRENT_SONG, currentSong);
                 startActivity(intent);
+                Log.e(LOG_TAG, currentSong.toString());
             }
 
             @Override

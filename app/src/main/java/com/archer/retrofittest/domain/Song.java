@@ -96,4 +96,15 @@ public class Song implements Parcelable{
     public void setIsFavorite(boolean isFavorite) {
         this.isFavorite = isFavorite;
     }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", artistName='" + artistName + '\'' +
+                ", urlSmallImage='" + urlSmallImage + '\'' +
+                ", urlMediumImage='" + urlMediumImage + '\'' +
+                '}';
+    }
 }

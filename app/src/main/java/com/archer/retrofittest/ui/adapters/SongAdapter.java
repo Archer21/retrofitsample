@@ -23,7 +23,6 @@ public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
 
     Context context;
     ArrayList<Song> mSongsList;
-    ArrayList<Song> mFavoriteLists;
 
     public SongAdapter(Context context) {
         this.context = context;
@@ -36,11 +35,6 @@ public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
             throw new NullPointerException("The items cannot by null");
 
         this.mSongsList.addAll(songs);
-        notifyDataSetChanged();
-    }
-
-    public void setData(ArrayList<Song> favorites) {
-        this.mFavoriteLists = favorites;
         notifyDataSetChanged();
     }
 
@@ -58,6 +52,7 @@ public class SongAdapter extends RecyclerView.Adapter<BaseGridViewHolder>{
     @Override
     public void onBindViewHolder(BaseGridViewHolder holder, int position) {
         Song currentSong = mSongsList.get(position);
+//        holder.setSongId(currentSong.getId());
         holder.setmName(currentSong.getName());
         holder.setmImage(context, currentSong.getUrlSmallImage());
     }

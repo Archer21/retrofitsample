@@ -106,7 +106,7 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
                     public boolean onMenuItemClick(MenuItem item) {
 //                        Toast.makeText(getActivity(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
                         delete(v, pos);
-                        return true;
+                        return false;
                     }
                 });
                 popupMenu.show();

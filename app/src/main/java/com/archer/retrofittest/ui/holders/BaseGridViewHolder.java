@@ -11,16 +11,21 @@ import com.squareup.picasso.Picasso;
 
 public class BaseGridViewHolder extends RecyclerView.ViewHolder {
 
+    String songId;
     ImageView mImage;
-    TextView mTitle;
+    TextView  mTitle;
 
     public BaseGridViewHolder(View itemView) {
         super(itemView);
 
+        songId = "";
         mImage = (ImageView) itemView.findViewById(R.id.item_image);
         mTitle = (TextView)  itemView.findViewById(R.id.item_title);
     }
 
+    public void setSongId(int id){
+        songId = String.valueOf(id);
+    }
     public void setmName(String name)
     {
         mTitle.setText(name);
