@@ -37,6 +37,7 @@ public class SongDetailActivity extends AppCompatActivity {
 
     private ContentResolver mContentResolver;
     private boolean isFavorite;
+    private Song myCurrentSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class SongDetailActivity extends AppCompatActivity {
 
         // Recibimos el objeto por medio de getParcelable
         Song detailSong   = getIntent().getParcelableExtra(CURRENT_SONG);
-
+        myCurrentSong     = detailSong;
         songId            = detailSong.getId();
         favoriteSongId    = String.valueOf(songId);
         String artistName = detailSong.getArtistName();
@@ -83,40 +84,37 @@ public class SongDetailActivity extends AppCompatActivity {
     public void addToFavorites(View view){
         if (!isFavorite){
             FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
-            insertFavorite();
             isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+            insertFavorite();
             addFavorite.setText("Delete from Favorites");
             Log.e(LOG_TAG, "The id " + favoriteSongId + " is " + String.valueOf(isFavorite));
 
         } else {
             FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
-            deleteFavorite();
             isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+            deleteFavorite();
             addFavorite.setText("Save on Favorites");
             Log.e(LOG_TAG, "The id is " + favoriteSongId + " " + String.valueOf(isFavorite));
         }
     }
     private void insertFavorite(){
-//        ContentValues contentValues = new ContentValues();
-//        mContentResolver = this.getContentResolver();
-//        Uri uri = FavoritesContract.URI_TABLE;
-//        String title = myCurrentSong.getName();
-//        String image = myCurrentSong.getUrlSmallImage();
-//        contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
-//        contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
-//        mContentResolver.insert(uri, contentValues);
-        Toast.makeText(getApplicationContext(), "Added to favorites", Toast.LENGTH_SHORT).show();
+        ContentValues contentValues = new ContentValues();
+        mContentResolver = this.getContentResolver();
+        Uri uri = FavoritesContract.URI_TABLE;
+        String title = songNameDetail.getText().toString();
+        String image = myCurrentSong.getUrlSmallImage();
+        contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
+        contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
+        mContentResolver.insert(uri, contentValues);
+//        Toast.makeText(getApplicationContext(), "Added to favorites", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteFavorite(){
-//        ContentResolver cr = this.getContentResolver();
-//        Al momento de borrar el favorito accedemos a la sharedPreference con la key del id del favorito
-//        y procederemos a eliminar esa sharedPreference
-//        String _ID = ;
-//        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
-//        cr.delete(uri, null, null);
-        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
-
+        ContentResolver cr = this.getContentResolver();
+        String _ID = favoriteSongId;
+        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+        cr.delete(uri, null, null);
+//        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
     }
 
 
