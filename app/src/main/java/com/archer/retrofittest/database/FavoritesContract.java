@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 
 public class FavoritesContract {
     interface FavoritesColumns {
-//        String FAVORITES_ID = "_ID";
+        String FAVORITES_ID = "_ID";
         String FAVORITES_TITLE = "favorites_title";
 //        String FAVORITES_DESCRIPTION = "favorites_description";
 //        String FAVORITES_DATE = "favorites_date";

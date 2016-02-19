@@ -83,38 +83,50 @@ public class SongDetailActivity extends AppCompatActivity {
 
     public void addToFavorites(View view){
         if (!isFavorite){
-            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
-            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+//            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
+//            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
             insertFavorite();
             addFavorite.setText("Delete from Favorites");
             Log.e(LOG_TAG, "The id " + favoriteSongId + " is " + String.valueOf(isFavorite));
 
         } else {
-            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
-            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+//            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
+//            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
             deleteFavorite();
             addFavorite.setText("Save on Favorites");
             Log.e(LOG_TAG, "The id is " + favoriteSongId + " " + String.valueOf(isFavorite));
         }
     }
     private void insertFavorite(){
-        ContentValues contentValues = new ContentValues();
-        mContentResolver = this.getContentResolver();
-        Uri uri = FavoritesContract.URI_TABLE;
-        String title = songNameDetail.getText().toString();
-        String image = myCurrentSong.getUrlSmallImage();
-        contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
-        contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
-        mContentResolver.insert(uri, contentValues);
+        if (!FavoritesPreferences.PREFS_NAME.contains(favoriteSongId)){
+            ContentValues contentValues = new ContentValues();
+            mContentResolver = this.getContentResolver();
+            Uri uri = FavoritesContract.URI_TABLE;
+            String id    = favoriteSongId;
+            String title = songNameDetail.getText().toString();
+            String image = myCurrentSong.getUrlSmallImage();
+
+            contentValues.put(FavoritesContract.Favorites.FAVORITES_ID, id);
+            contentValues.put(FavoritesContract.Favorites.FAVORITES_TITLE, title);
+            contentValues.put(FavoritesContract.Favorites.FAVORITES_IMAGE, image);
+            mContentResolver.insert(uri, contentValues);
+            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
+            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
 //        Toast.makeText(getApplicationContext(), "Added to favorites", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void deleteFavorite(){
-        ContentResolver cr = this.getContentResolver();
-        String _ID = favoriteSongId;
-        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
-        cr.delete(uri, null, null);
-//        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
+//        if (FavoritesPreferences.PREFS_NAME.contains(favoriteSongId)){
+            ContentResolver cr = this.getContentResolver();
+            String _ID = favoriteSongId;
+            Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+            cr.delete(uri, null, null);
+            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
+            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+            Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
+//        }
     }
 
 

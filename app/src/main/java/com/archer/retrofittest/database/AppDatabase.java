@@ -22,7 +22,8 @@ public class AppDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + Tables.FAVORITES + "("
-                + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+//                + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + BaseColumns._ID + " INTEGER PRIMARY KEY UNIQUE,"
                 + FavoritesContract.FavoritesColumns.FAVORITES_TITLE + " TEXT NOT NULL,"
                 + FavoritesContract.FavoritesColumns.FAVORITES_IMAGE + " TEXT NOT NULL)");
     }
