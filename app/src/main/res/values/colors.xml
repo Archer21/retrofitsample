@@ -4,7 +4,7 @@
     <color name="colorPrimary">#222222</color>
     <color name="colorPrimaryDark">#191919</color>
     <color name="colorAccent">#ff0253</color>
-    <color name="window_background">#181818</color>
+    <color name="window_background">#2d2c2c</color>
 
     <!--General Colors-->
     <color name="accent_transparency">#cdff4646</color>
@@ -14,5 +14,7 @@
     <color name="accent_transparency_dark">#cd4d1d1d</color>
 
     <!--Song item colors-->
-    <color name="primary_dark_transparency">#222222</color>
+    <color name="primary_dark_transparency">#181818</color>
+    <color name="title_accent">#c20341</color>
+
 </resources>

@@ -31,7 +31,7 @@ import retrofit2.Response;
 public class SongsFragment extends Fragment {
 
     public static final String LOG_TAG = SongsFragment.class.getSimpleName();
-    public static final int NUM_COLUMS = 2;
+    public static final int NUM_COLUMS = 3;
     private static final String CURRENT_SONG = "CURRENT_SONG";
     private RecyclerView mSongList;
     private SongAdapter adapter;

@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:clickable="true"
     app:cardElevation="4dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    app:cardPreventCornerOverlap="false">
 
     <ImageView
         android:id="@+id/favorite_star"
@@ -29,16 +30,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/favorite_title"
-        android:layout_gravity="bottom"
-        android:gravity="center"
-        android:text="@string/song_item_title"
-        android:textSize="12sp"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="italic"
-        android:background="@color/colorPrimaryDark"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp" />
+        android:layout_height="35dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:gravity="left"
+        android:background="@color/primary_dark_transparency">
+
+        <TextView
+            android:id="@+id/favorite_title"
+            android:text="@string/song_item_title"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/favorite_artist_name"
+            android:text="Haruka Tomatsu"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

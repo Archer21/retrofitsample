@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.archer.retrofittest.activity.SongDetailActivity"
@@ -16,36 +15,94 @@
         android:src="@drawable/artist_placeholder"
         android:scaleType="centerCrop"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+    <TextView
+        android:id="@+id/song_name"
+        android:text="Masayume Chasing"
+        android:textColor="@color/text_secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginRight="30dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"/>
+    <ImageButton
+        android:id="@+id/add_to_favorites"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/selector_favorites"
+        android:background="@drawable/ripple"
+        android:onClick="addToFavorites"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_toLeftOf="@+id/download_song_button"
+        android:layout_toStartOf="@+id/download_song_button"
+        android:layout_marginRight="27dp"
+        android:layout_marginEnd="27dp" />
+
+    <ImageButton
+        android:id="@+id/download_song_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/download_active_button"
+        android:background="@drawable/ripple"
+        android:layout_marginRight="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_alignTop="@+id/add_to_favorites"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:id="@+id/controls"
+        android:layout_below="@+id/cover"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
 
         <TextView
-            android:text="Haruka Tomatsu"
-            android:textSize="20sp"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold|italic"
-            android:id="@+id/songNameDetail"
-            android:layout_width="wrap_content"
+            android:text="Space for controls"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add_to_favorites"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="addToFavorites"/>
+        android:layout_below="@id/controls"
+        android:id="@+id/relativeLayout">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_marginRight="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/boa"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/photo">
+            <RatingBar
+                android:id="@+id/rating_song"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/song_description"
+                android:text="@string/song_description"
+                android:textSize="15sp"
+                android:textColor="@color/text_secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <!--Here will be the comments fragment-->
+
+
+
+</RelativeLayout>

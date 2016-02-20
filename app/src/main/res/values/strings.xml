@@ -11,4 +11,5 @@
     <string name="title_activity_song_detail">SongDetailActivity</string>
     <string name="add_favorite">Add to favorites</string>
     <string name="delete_favorite">Delete Favorite</string>
+    <string name="song_description">MASAYUME CHASING es el Opening número 15 del anime Fairy Tail, interpretado por la cantante BoA, que comienza en el Episodio 176 y termina en el Episodio 188.</string>
 </resources>

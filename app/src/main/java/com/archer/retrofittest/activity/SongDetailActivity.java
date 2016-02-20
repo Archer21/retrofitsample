@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,10 +31,10 @@ public class SongDetailActivity extends AppCompatActivity {
     private int songId;
     private String favoriteSongId;
 
-    private TextView  songNameDetail;
-    private ImageView photoArtist;
-    private ImageView songCover;
-    private Button    addFavorite;
+    private TextView    songNameDetail;
+    private ImageView   photoArtist;
+    private ImageView   songCover;
+    private ImageButton addFavorite;
 
     private ContentResolver mContentResolver;
     private boolean isFavorite;
@@ -46,10 +47,10 @@ public class SongDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        songNameDetail  = (TextView)  findViewById(R.id.songNameDetail);
+        songNameDetail  = (TextView)  findViewById(R.id.song_name);
         photoArtist     = (ImageView) findViewById(R.id.photo);
         songCover       = (ImageView) findViewById(R.id.cover);
-        addFavorite     = (Button)    findViewById(R.id.add_to_favorites);
+        addFavorite     = (ImageButton)    findViewById(R.id.add_to_favorites);
 
         // Recibimos el objeto por medio de getParcelable
         Song detailSong   = getIntent().getParcelableExtra(CURRENT_SONG);
@@ -69,15 +70,15 @@ public class SongDetailActivity extends AppCompatActivity {
         isFavorite = FavoritesPreferences.getFavoriteId(SongDetailActivity.this, favoriteSongId);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (isFavorite){
-            addFavorite.setText("Delete from Favorites");
-        } else {
-            addFavorite.setText("Save on Favorites");
-        }
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        if (isFavorite){
+//            addFavorite.setText("Delete from Favorites");
+//        } else {
+//            addFavorite.setText("Save on Favorites");
+//        }
+//    }
 
     // Shared Preferences
 
@@ -86,14 +87,14 @@ public class SongDetailActivity extends AppCompatActivity {
 //            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
 //            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
             insertFavorite();
-            addFavorite.setText("Delete from Favorites");
+//            addFavorite.setText("Delete from Favorites");
             Log.e(LOG_TAG, "The id " + favoriteSongId + " is " + String.valueOf(isFavorite));
 
         } else {
 //            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
 //            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
             deleteFavorite();
-            addFavorite.setText("Save on Favorites");
+//            addFavorite.setText("Save on Favorites");
             Log.e(LOG_TAG, "The id is " + favoriteSongId + " " + String.valueOf(isFavorite));
         }
     }
