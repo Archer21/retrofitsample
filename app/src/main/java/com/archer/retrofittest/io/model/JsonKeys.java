@@ -12,10 +12,13 @@ public class JsonKeys {
 
     // Songs
     public static final String ID                = "id";
+    public static final String SONG_RATING       = "rating";
     public static final String SONG_TITLE        = "title";
     public static final String SONG_IMAGES       = "images";
     public static final String SONG_IMAGE_SMALL  = "small";
     public static final String SONG_IMAGE_MEDIUM = "medium";
+    public static final String SONG_DESCRIPTION  = "description";
+    public static final String SONG_STREAM_URI   = "stream_uri";
 
     // Artists JsonKeys
     public static final String ARTISTS_RESULTS = "artists";

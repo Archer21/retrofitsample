@@ -39,18 +39,23 @@ public class SongDeserializer implements JsonDeserializer<SongResponse> {
 
             JsonObject songData = array.get(i).getAsJsonObject();
 
-            int    id   = songData.get(JsonKeys.ID).getAsInt();
+            int id      = songData.get(JsonKeys.ID).getAsInt();
+            int rating  = songData.get(JsonKeys.SONG_RATING).getAsInt();
             String name = songData.get(JsonKeys.SONG_TITLE).getAsString();
-            String artistName = songData.get(JsonKeys.SONGS_ARTIST_NAME).getAsString();
-
+            String artistName  = songData.get(JsonKeys.SONGS_ARTIST_NAME).getAsString();
+            String description = songData.get(JsonKeys.SONG_DESCRIPTION).getAsString();
+            String streamUri   = songData.get(JsonKeys.SONG_STREAM_URI).getAsString();
             JsonArray songImages = songData.getAsJsonArray(JsonKeys.SONG_IMAGES);
             HashMap<Integer, String>  images = extractSongsImageFromJsonArray(songImages);
 
             currentSong.setId(id);
+            currentSong.setRating(rating);
             currentSong.setName(name);
             currentSong.setArtistName(artistName);
             currentSong.setUrlSmallImage(images.get(0));
             currentSong.setUrlMediumImage(images.get(1));
+            currentSong.setDescription(description);
+            currentSong.setStreamUri(streamUri);
 
             songs.add(currentSong);
         }

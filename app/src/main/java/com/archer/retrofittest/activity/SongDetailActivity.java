@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +33,11 @@ public class SongDetailActivity extends AppCompatActivity {
     private String favoriteSongId;
 
     private TextView    songNameDetail;
+    private TextView    songDescription;
     private ImageView   photoArtist;
     private ImageView   songCover;
     private ImageButton addFavorite;
+    private RatingBar   ratingBar;
 
     private ContentResolver mContentResolver;
     private boolean isFavorite;
@@ -47,54 +50,44 @@ public class SongDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        songNameDetail  = (TextView)  findViewById(R.id.song_name);
-        photoArtist     = (ImageView) findViewById(R.id.photo);
-        songCover       = (ImageView) findViewById(R.id.cover);
-        addFavorite     = (ImageButton)    findViewById(R.id.add_to_favorites);
+        songNameDetail  = (TextView)    findViewById(R.id.song_name);
+        songDescription = (TextView)    findViewById(R.id.song_description);
+        photoArtist     = (ImageView)   findViewById(R.id.photo);
+        songCover       = (ImageView)   findViewById(R.id.cover);
+        addFavorite     = (ImageButton) findViewById(R.id.add_to_favorites);
+        ratingBar       = (RatingBar)   findViewById(R.id.rating_song);
 
         // Recibimos el objeto por medio de getParcelable
-        Song detailSong   = getIntent().getParcelableExtra(CURRENT_SONG);
-        myCurrentSong     = detailSong;
-        songId            = detailSong.getId();
-        favoriteSongId    = String.valueOf(songId);
-        String artistName = detailSong.getArtistName();
-        String photo      = detailSong.getUrlSmallImage();
-        String cover      = detailSong.getUrlMediumImage();
+        Song detailSong     = getIntent().getParcelableExtra(CURRENT_SONG);
+        myCurrentSong       = detailSong;
+        songId              = detailSong.getId();
+        favoriteSongId      = String.valueOf(songId);
+        String artistName   = detailSong.getArtistName();
+        String photo        = detailSong.getUrlSmallImage();
+        String cover        = detailSong.getUrlMediumImage();
+        String description  = detailSong.getDescription();
+        float  songRate     = detailSong.getRating();
+
         // posteriormente llenamos los datos
         // de la cancion
         songNameDetail.setText(artistName);
+        songDescription.setText(description);
+        ratingBar.setRating(songRate);
         setPhoto(photo);
         setCover(cover);
+        Log.e(LOG_TAG, detailSong.toString());
 
         // Favorites
         isFavorite = FavoritesPreferences.getFavoriteId(SongDetailActivity.this, favoriteSongId);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        if (isFavorite){
-//            addFavorite.setText("Delete from Favorites");
-//        } else {
-//            addFavorite.setText("Save on Favorites");
-//        }
-//    }
-
-    // Shared Preferences
-
     public void addToFavorites(View view){
         if (!isFavorite){
-//            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, true);
-//            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
             insertFavorite();
-//            addFavorite.setText("Delete from Favorites");
             Log.e(LOG_TAG, "The id " + favoriteSongId + " is " + String.valueOf(isFavorite));
 
         } else {
-//            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
-//            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
             deleteFavorite();
-//            addFavorite.setText("Save on Favorites");
             Log.e(LOG_TAG, "The id is " + favoriteSongId + " " + String.valueOf(isFavorite));
         }
     }
@@ -119,19 +112,18 @@ public class SongDetailActivity extends AppCompatActivity {
     }
 
     private void deleteFavorite(){
-//        if (FavoritesPreferences.PREFS_NAME.contains(favoriteSongId)){
-            ContentResolver cr = this.getContentResolver();
-            String _ID = favoriteSongId;
-            Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
-            cr.delete(uri, null, null);
-            FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
-            isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
-            Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
-//        }
+        ContentResolver cr = this.getContentResolver();
+        String _ID = favoriteSongId;
+        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+        cr.delete(uri, null, null);
+        FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
+        isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
     }
 
 
     // Metodos para establecer la UI
+
     private void setPhoto(String url) {
         Picasso.with(SongDetailActivity.this)
                 .load(url)

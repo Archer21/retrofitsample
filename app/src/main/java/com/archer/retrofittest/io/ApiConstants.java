@@ -4,7 +4,7 @@ package com.archer.retrofittest.io;
  * Created by Archer on 1/2/16.
  */
 public class ApiConstants {
-//  Popular Songs
+//  Hyped Songs
 //  https://api.myjson.com/bins/3vfqf
 
     public static final String URL_BASE = "https://api.myjson.com/";
@@ -13,7 +13,7 @@ public class ApiConstants {
 
     public static final String URL_SONGS = PATH_BIN + PARAM_SONGS;
 
-//
+//  Artists
 //  https://api.myjson.com/bins/tl69
 
     public static final String PARAM_ARTISTS = "tl69";

@@ -9,6 +9,6 @@
     <!--Song item sizes-->
     <!--<dimen name="song_width_main_item_size">match_parent</dimen>-->
     <!--<dimen name="song_height_main_item_size">200dp</dimen>-->
-    <dimen name="song_item_width_size">100dp</dimen>
-    <dimen name="song_item_height_size">130dp</dimen>
+    <dimen name="song_item_width_size">120dp</dimen>
+    <dimen name="song_item_height_size">150dp</dimen>
 </resources>
