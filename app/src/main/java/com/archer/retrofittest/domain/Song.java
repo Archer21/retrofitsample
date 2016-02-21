@@ -6,27 +6,36 @@ import android.os.Parcelable;
 public class Song implements Parcelable{
 
     private int id;
+    private int rating;
     private String name;
     private String artistName;
     private String urlSmallImage;
     private String urlMediumImage;
+    private String description;
+    private String streamUri;
     public static boolean isFavorite;
 
     public Song(Parcel in) {
-        id   = in.readInt();
-        name = in.readString();
-        artistName = in.readString();
-        urlSmallImage = in.readString();
+        id     = in.readInt();
+        rating = in.readInt();
+        name   = in.readString();
+        artistName     = in.readString();
+        urlSmallImage  = in.readString();
         urlMediumImage = in.readString();
+        description    = in.readString();
+        streamUri      = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
+        dest.writeInt(rating);
         dest.writeString(name);
         dest.writeString(artistName);
         dest.writeString(urlSmallImage);
         dest.writeString(urlMediumImage);
+        dest.writeString(description);
+        dest.writeString(streamUri);
     }
 
     @Override
@@ -97,14 +106,41 @@ public class Song implements Parcelable{
         this.isFavorite = isFavorite;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStreamUri() {
+        return streamUri;
+    }
+
+    public void setStreamUri(String streamUri) {
+        this.streamUri = streamUri;
+    }
+
     @Override
     public String toString() {
         return "Song{" +
                 "id=" + id +
+                ", rating=" + rating +
                 ", name='" + name + '\'' +
                 ", artistName='" + artistName + '\'' +
                 ", urlSmallImage='" + urlSmallImage + '\'' +
                 ", urlMediumImage='" + urlMediumImage + '\'' +
+                ", description='" + description + '\'' +
+                ", streamUri='" + streamUri + '\'' +
                 '}';
     }
 }
