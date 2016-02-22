@@ -2,11 +2,14 @@ package com.archer.retrofittest.ui.holders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.archer.retrofittest.R;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class FavoritesViewHolder extends RecyclerView.ViewHolder {
@@ -28,10 +31,36 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder {
     public void setmTitle(String title){
         mTitle.setText(title);
     }
-    public void setmImage(Context context, String image){
+    public void setmImage(final Context context, final String url)
+    {
         Picasso.with(context)
-                .load(image)
+                .load(url)
                 .placeholder(R.drawable.artist_placeholder)
-                .error(android.R.drawable.ic_dialog_alert);
+                .networkPolicy(NetworkPolicy.OFFLINE)
+                .into(mImage, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+                        //Try again online if cache failed
+                        Picasso.with(context)
+                                .load(url)
+                                .error(R.drawable.artist_placeholder)
+                                .into(mImage, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        Log.v("Picasso","Could not fetch image");
+                                    }
+                                });
+                    }
+                });
     }
 }

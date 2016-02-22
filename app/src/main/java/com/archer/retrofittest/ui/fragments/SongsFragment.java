@@ -21,6 +21,7 @@ import com.archer.retrofittest.io.apiadapters.SongApiAdapter;
 import com.archer.retrofittest.io.model.SongResponse;
 import com.archer.retrofittest.ui.ItemOffsetDecoration;
 import com.archer.retrofittest.ui.adapters.SongAdapter;
+import com.archer.retrofittest.ui.holders.BaseGridViewHolder;
 import com.archer.retrofittest.ui.uiutils.RecyclerItemClickListener;
 
 

@@ -12,6 +12,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +56,7 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.fragment_favorites_main_container);
         setConfig();
+        setHasOptionsMenu(true);
         return root;
     }
 
@@ -86,15 +89,15 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLS));
         mRecyclerView.setAdapter(mFavoritesAdapter);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), view.toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onItemLongClick(final View view, int position) {
-//                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
+//        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+////                Toast.makeText(getActivity(), view.toString(), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onItemLongClick(final View view, int position) {
+////                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
 //                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
 //                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
 //
@@ -110,22 +113,24 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 //                    }
 //                });
 //                popupMenu.show();
-            }
-        }));
+//            }
+//        }));
     }
 
-    public void delete(View view, int position){
-        String _ID = ((TextView) view.findViewById(R.id.item_id)).getText().toString();
-        String title = ((TextView) view.findViewById(R.id.favorite_title)).getText().toString();
-        Toast.makeText(getActivity(), "id: " + _ID + ", title: " + title, Toast.LENGTH_SHORT).show();
+//    public void delete(View view, int position){
+////        String _ID = ((TextView) view.findViewById(R.id.item_id)).getText().toString();
+////        String title = ((TextView) view.findViewById(R.id.favorite_title)).getText().toString();
+////        Toast.makeText(getActivity(), "id: " + _ID + ", title: " + title, Toast.LENGTH_SHORT).show();
 //        ContentResolver cr = getActivity().getContentResolver();
-//        String _ID = FavoritesPreferences.getFavoriteId();
-//        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+////        String _ID = FavoritesPreferences.getFavoriteId();
+//        Uri uri = FavoritesContract.URI_TABLE;
 //        cr.delete(uri, null, null);
-//        FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
-//        isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
-//        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
-    }
+//        mData.clear();
+//
+////        FavoritesPreferences.setFavoriteId(getApplicationContext(), favoriteSongId, false);
+////        isFavorite = FavoritesPreferences.getFavoriteId(getApplicationContext(), favoriteSongId);
+//////        Toast.makeText(getApplicationContext(), "Deleted to favorites", Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public Loader<List<Song>> onCreateLoader(int id, Bundle args) {
@@ -156,6 +161,36 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
     public void onLoaderReset(Loader<List<Song>> loader) {
         List<Song> placeholderArray = new ArrayList<>();
         mFavoritesAdapter.setData(placeholderArray);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_favorite, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.delete_favorites) {
+            delete();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    public void delete(){
+        ContentResolver cr = getActivity().getContentResolver();
+        Uri uri = FavoritesContract.URI_TABLE;
+        cr.delete(uri, null, null);
+        FavoritesPreferences.clearPreferences(getActivity());
+        mData.clear();
+        mFavoritesAdapter.notifyDataSetChanged();
+
     }
 }
 

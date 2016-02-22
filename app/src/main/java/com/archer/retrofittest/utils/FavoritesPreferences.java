@@ -9,6 +9,14 @@ import android.content.SharedPreferences;
 public class FavoritesPreferences {
     public static final String PREFS_NAME = "FAVORITES_PREFERENCES";
 
+    public static void clearPreferences(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
     // Set ResourceID for favorite
     public static void setFavoriteId(Context context, String id, boolean value) {
         SharedPreferences preferences = context.getSharedPreferences(

@@ -104,6 +104,8 @@ public class AppProvider extends ContentProvider {
 
         switch (match) {
 
+            case FAVORITES:
+                return db.delete(AppDatabase.Tables.FAVORITES, selection, selectionArgs);
             case FAVORITES_ID:
                 String favoritesId = FavoritesContract.Favorites.getFavoriteId(uri);
                 String favoritesSelectionCriteria = BaseColumns._ID + "=" + favoritesId
