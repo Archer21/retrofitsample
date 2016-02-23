@@ -2,11 +2,15 @@ package com.archer.retrofittest.ui.fragments;
 
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.PopupMenu;
@@ -21,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.archer.retrofittest.R;
+import com.archer.retrofittest.activity.SongDetailActivity;
 import com.archer.retrofittest.database.FavoritesContract;
 import com.archer.retrofittest.database.FavoritesLoader;
 import com.archer.retrofittest.domain.Song;
@@ -34,11 +39,13 @@ import java.util.List;
 public class FavoritesFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Song>>{
 
     private static final int NUM_COLS = 4;
+    private static final String SIMPLE_ROW_CURSOR = "SIMPLE_ROW_CURSOR";
     private RecyclerView mRecyclerView;
     private FavoritesAdapter mFavoritesAdapter;
     private ContentResolver mContentResolver;
     private static final int LOADER_ID = 1;
     private List<Song> mData;
+    private Song favoriteData;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -89,15 +96,15 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLS));
         mRecyclerView.setAdapter(mFavoritesAdapter);
-//        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-////                Toast.makeText(getActivity(), view.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onItemLongClick(final View view, int position) {
-////                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                goToSimpleRow(view, position);
+            }
+
+            @Override
+            public void onItemLongClick(final View view, int position) {
+//                Toast.makeText(getActivity(), "Log click" , Toast.LENGTH_SHORT).show();
 //                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
 //                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
 //
@@ -113,8 +120,20 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 //                    }
 //                });
 //                popupMenu.show();
-//            }
-//        }));
+            }
+        }));
+    }
+
+    public void goToSimpleRow(View view, int position){
+        String _ID = ((TextView) view.findViewById(R.id.item_id)).getText().toString();
+        ContentResolver cr = getActivity().getContentResolver();
+        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+        Cursor cursor = cr.query(uri, null, null, null, _ID);
+        String name = cursor.getString(cursor.getColumnIndex(FavoritesContract.Favorites.FAVORITES_TITLE))
+        favoriteData.setName();
+        Intent intent = new Intent(getActivity(), SongDetailActivity.class);
+        intent.putExtra(SIMPLE_ROW_CURSOR, song);
+        cursor.close();
     }
 
 //    public void delete(View view, int position){
@@ -178,12 +197,12 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.delete_favorites) {
-            delete();
+            deleteAllFavorites();
         }
 
         return super.onOptionsItemSelected(item);
     }
-    public void delete(){
+    public void deleteAllFavorites(){
         ContentResolver cr = getActivity().getContentResolver();
         Uri uri = FavoritesContract.URI_TABLE;
         cr.delete(uri, null, null);
