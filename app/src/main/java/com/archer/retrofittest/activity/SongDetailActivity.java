@@ -6,15 +6,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +29,9 @@ import com.archer.retrofittest.domain.Song;
 import com.archer.retrofittest.utils.FavoritesPreferences;
 import com.squareup.picasso.Picasso;
 
-public class SongDetailActivity extends AppCompatActivity {
+import java.io.IOException;
+
+public class SongDetailActivity extends AppCompatActivity implements MediaPlayer.OnPreparedListener, MediaController.MediaPlayerControl {
 
     private static final String CURRENT_SONG = "CURRENT_SONG";
     private static final String LOG_TAG = SongDetailActivity.class.getSimpleName();
@@ -42,6 +48,13 @@ public class SongDetailActivity extends AppCompatActivity {
     private ContentResolver mContentResolver;
     private boolean isFavorite;
     private Song myCurrentSong;
+
+    // MediaPlayer
+    private MediaPlayer mediaPlayer;
+    private MediaController mediaController;
+    private String audioFile;
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +92,32 @@ public class SongDetailActivity extends AppCompatActivity {
 
         // Favorites
         isFavorite = FavoritesPreferences.getFavoriteId(SongDetailActivity.this, favoriteSongId);
+
+        // MediaPlayer
+        audioFile = detailSong.getStreamUri();
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setOnPreparedListener(this);
+        mediaController = new MediaController(this);
+        try {
+            mediaPlayer.setDataSource(audioFile);
+            mediaPlayer.prepareAsync();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Could not open file " + audioFile + " for playback.", e);
+        }
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        try {
+//            mediaPlayer.setDataSource(audioFile);
+//            mediaPlayer.prepareAsync();
+//            mediaPlayer.start();
+//        } catch (IOException e) {
+//            Log.e(LOG_TAG, "Could not open file " + audioFile + " for playback.", e);
+//        }
+//    }
 
     public void addToFavorites(View view){
         if (!isFavorite){
@@ -138,6 +176,82 @@ public class SongDetailActivity extends AppCompatActivity {
                 .placeholder(R.drawable.artist_placeholder)
                 .error(android.R.drawable.ic_dialog_alert)
                 .into(songCover);
+    }
+
+    // MediaController methods
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        Log.d(LOG_TAG, "onPrepared");
+        mediaController.setMediaPlayer(this);
+        mediaController.setAnchorView(findViewById(R.id.controls));
+        handler.post(new Runnable() {
+            public void run() {
+                mediaController.setEnabled(true);
+                mediaController.show();
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //the MediaController will hide after 3 seconds - tap the screen to make it appear again
+        mediaController.show();
+        return false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        mediaController.hide();
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
+    public void start() {
+        mediaPlayer.start();
+    }
+
+    public void pause() {
+        mediaPlayer.pause();
+    }
+
+    public int getDuration() {
+        return mediaPlayer.getDuration();
+    }
+
+    public int getCurrentPosition() {
+        return mediaPlayer.getCurrentPosition();
+    }
+
+    public void seekTo(int i) {
+        mediaPlayer.seekTo(i);
+    }
+
+    public boolean isPlaying() {
+        return mediaPlayer.isPlaying();
+    }
+
+    public int getBufferPercentage() {
+        return 0;
+    }
+
+    public boolean canPause() {
+        return true;
+    }
+
+    public boolean canSeekBackward() {
+        return true;
+    }
+
+    public boolean canSeekForward() {
+        return true;
+    }
+
+    @Override
+    public int getAudioSessionId() {
+        return 0;
     }
 
 }

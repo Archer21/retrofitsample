@@ -99,7 +99,7 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                goToSimpleRow(view, position);
+//                goToSimpleRow(view, position);
             }
 
             @Override
@@ -124,17 +124,17 @@ public class FavoritesFragment extends Fragment implements LoaderManager.LoaderC
         }));
     }
 
-    public void goToSimpleRow(View view, int position){
-        String _ID = ((TextView) view.findViewById(R.id.item_id)).getText().toString();
-        ContentResolver cr = getActivity().getContentResolver();
-        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
-        Cursor cursor = cr.query(uri, null, null, null, _ID);
-        String name = cursor.getString(cursor.getColumnIndex(FavoritesContract.Favorites.FAVORITES_TITLE))
-        favoriteData.setName();
-        Intent intent = new Intent(getActivity(), SongDetailActivity.class);
-        intent.putExtra(SIMPLE_ROW_CURSOR, song);
-        cursor.close();
-    }
+//    public void goToSimpleRow(View view, int position){
+//        String _ID = ((TextView) view.findViewById(R.id.item_id)).getText().toString();
+//        ContentResolver cr = getActivity().getContentResolver();
+//        Uri uri = FavoritesContract.Favorites.buildFavoriteUri(_ID);
+//        Cursor cursor = cr.query(uri, null, null, null, _ID);
+//        String name = cursor.getString(cursor.getColumnIndex(FavoritesContract.Favorites.FAVORITES_TITLE))
+//        favoriteData.setName();
+//        Intent intent = new Intent(getActivity(), SongDetailActivity.class);
+//        intent.putExtra(SIMPLE_ROW_CURSOR, song);
+//        cursor.close();
+//    }
 
 //    public void delete(View view, int position){
 ////        String _ID = ((TextView) view.findViewById(R.id.item_id)).getText().toString();
