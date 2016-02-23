@@ -48,6 +48,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder {
                         //Try again online if cache failed
                         Picasso.with(context)
                                 .load(url)
+                                .placeholder(R.drawable.artist_placeholder)
                                 .error(R.drawable.artist_placeholder)
                                 .into(mImage, new Callback() {
                                     @Override

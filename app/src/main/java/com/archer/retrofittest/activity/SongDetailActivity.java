@@ -97,7 +97,12 @@ public class SongDetailActivity extends AppCompatActivity implements MediaPlayer
         audioFile = detailSong.getStreamUri();
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnPreparedListener(this);
-        mediaController = new MediaController(this);
+        mediaController = new MediaController(this) {
+            @Override
+            public void hide() {
+                //Do not hide.
+            }
+        };
         try {
             mediaPlayer.setDataSource(audioFile);
             mediaPlayer.prepareAsync();
@@ -192,18 +197,10 @@ public class SongDetailActivity extends AppCompatActivity implements MediaPlayer
         });
     }
 
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        //the MediaController will hide after 3 seconds - tap the screen to make it appear again
-        mediaController.show();
-        return false;
-    }
-
     @Override
     protected void onStop() {
         super.onStop();
-//        mediaController.hide();
+        mediaController.hide();
         mediaPlayer.stop();
         mediaPlayer.release();
         mediaPlayer = null;
